@@ -70,6 +70,10 @@ const refreshTokens = useMutation({
     },
 
     onSuccess: ({ token ,id,role}) => {
+        dispatch({ type: "SET_LOADING", payload: true })
+
+        console.log("refresh token",token)
+
       setAuthToken(token)
       queryClient.setQueryData<AuthData>(["auth"], {
         token: token,

@@ -1,4 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query'
+import {  useQueryClient } from '@tanstack/react-query'
 import { Outlet, Navigate,   } from 'react-router-dom'
 import type { AuthData, ROLES } from '../types/userTypes'
 
@@ -11,12 +11,11 @@ type propsRouterProtected = {
 const RouterProtected = ({roles}:propsRouterProtected) => {
 
   const queryClient = useQueryClient();
-const auth = queryClient.getQueryData(["auth"]) as AuthData;
+ const auth = queryClient.getQueryData<AuthData>(["auth"]) ?? null
 
 
   const token  = auth?.token
   const role = auth?.role as ROLES
-
 
   if(!token) return <Navigate to={"/login"} replace />
 
