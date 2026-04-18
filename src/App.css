@@ -1,0 +1,49 @@
+*{
+ padding: 0;
+ box-sizing: border-box;
+ margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/**menu*/
+
+.link{
+     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #A1A1C2;
+    padding: 22px;
+    font-weight: 900;
+    font-size: large
+}
+
+.link:hover{
+     background-color: #104153 ;  
+     color: #00F0FF;
+
+}
+.title {
+  font-size: 25px;
+  font-weight: 900;
+   font-style: italic;
+  text-transform: uppercase;
+  color: #00f0ff;
+  margin-right: 15px;
+}
+
+
+::-webkit-scrollbar {
+  width: 1px; 
+}
+
+::-webkit-scrollbar-track {
+  background: #10111A; 
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00f0ff; 
+  border-radius: 6px;
+}
+
