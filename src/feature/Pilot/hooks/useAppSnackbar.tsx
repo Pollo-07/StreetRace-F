@@ -1,7 +1,7 @@
 import { useSnackbar } from "notistack";
 
 export default function UseAppSnackbar() {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar, } = useSnackbar();
 
   const showSuccess = (message: string) => {
     enqueueSnackbar(message, { variant: "success" });

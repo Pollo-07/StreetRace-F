@@ -9,10 +9,8 @@ import {
 } from "@mui/material";
 import { useState, } from "react";
 import type { challengaAll } from "../../../types/challangeTypes";
-import DarkField from "../../../components/darkField";
 import SectionBlock from "../../../components/sectionBlock";
 import ButtonCustom from "../../../components/buttonCustom";
-import { string } from "zod";
 import { useAdmin } from "../../admin/hooks/useAdmin";
 
 type Props = {
