@@ -7,8 +7,6 @@ import useForm from "../../../utils/userForm";
 import type { User, UserForm } from "../../../types/userTypes";
 import { useEffect } from "react";
 import { useAdmin } from "../hooks/useAdmin";
-import { email } from "zod";
-
 
 
   interface PilotFormProps {
@@ -24,7 +22,8 @@ export default function PilotForm({PilotData}:PilotFormProps) {
     zona_localidad:"",
     zona_estado:"",
     zona_pais:"",
-     zona_ciudad:""
+     zona_ciudad:"",
+     foto_perfil: null
   }
 
   const {formData,handleChange,resetForm} = useForm(initiData)

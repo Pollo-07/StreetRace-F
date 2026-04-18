@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import imgPrueba from "../assets/img-prueba.png";
 import CardsCars from "../components/cardsCars";
 import { RankConverter } from "../../../utils/rankConverter";
 import { Engangements, streetCred, WinRate } from "../../../utils/winRate";

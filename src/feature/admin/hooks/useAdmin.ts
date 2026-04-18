@@ -9,7 +9,7 @@ export const useAdmin = () => {
  const queryClient = useQueryClient()
 
 
-const {data:userAll,error:ErrorUser,isLoading:isLoadingUser} = useQuery({
+const {data:userAll,error:ErrorUser,} = useQuery({
     queryKey: ["userAll",],
     queryFn: async () => {
 
@@ -52,11 +52,7 @@ const userAllSearch = useMutation({
     }
     
   },
-  onSuccess: (data) => {
-   
-    // queryClient.invalidateQueries({ queryKey: ["user"] })
 
-  },
    onError: (err) => {
       showError(`Error al traer  a los usuarios ${err?.message || "Inténtalo de nuevo"}`,);
   },

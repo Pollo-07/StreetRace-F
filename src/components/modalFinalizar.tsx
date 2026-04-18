@@ -1,4 +1,4 @@
-import { Box, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material'
+import { Box, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
 import { useState } from 'react'
 import SectionBlock from './sectionBlock';
 import UseChallanges from "../feature/Pilot/hooks/useChallenges";

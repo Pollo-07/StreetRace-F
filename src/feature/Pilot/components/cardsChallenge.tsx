@@ -34,11 +34,7 @@ const CardsChallenge = ({ active }: Props) => {
   setSelectedChallenge(challengeItem);
   Setopen(true);
 };
- const handlerOpenOpinionModal = (challengeItem: any) => {
-  setSelectedChallenge(challengeItem);
-};
-
-
+ 
   return (
     <>
       {!challengesFilter || challengesFilter.length === 0 ? (

@@ -110,10 +110,16 @@ function ModalCars({
   } finally{
       resetForm()
       setLoading(false);
+      setSuccess(true)
       handleClose();
     }
      
   };
+
+
+
+
+
 
   const handleClose = () => {
   resetForm(initialForm);

@@ -6,7 +6,6 @@ import {
 } from "@mui/material";
 import image from "../../Pilot/assets/img-prueba.png"
 import { useAdmin } from "../hooks/useAdmin";import { useState } from "react";
-import ModalFinalizar from "../../../components/modalFinalizar";
 import DisputeOpinionModal from "../../Pilot/components/modalDisputa";
 
 export const DisputeCard = () => {
