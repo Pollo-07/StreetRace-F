@@ -25,11 +25,6 @@ const MyGarage = () => {
   const {vehicles} = UseVehicle()
   const  vehicleActivo = vehicles?.find((item)=>item.activo)
 
-  console.log("vehicleActivo",vehicleActivo)
-
-  const carImage =
-    "https://images.unsplash.com/photo-1503376780353-7e6692767b70";
-
   return (
     <PageWrapper>
         <Box sx={{ color: "white"}}>

@@ -2,12 +2,10 @@ import axios from "axios";
 
 import { getAuthToken } from "./getAuthToken";
 import type { LoginType, RegisterType } from "../types/userTypes";
-import type { VehicleForm } from "../types/vehicleTypes";
 import type { ChallengeForm } from "../types/challangeTypes";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  // headers: { "Content-Type": "application/json" },
   timeout: 10000,
   withCredentials: true,
 });
