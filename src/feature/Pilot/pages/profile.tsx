@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import CardsCars from "../components/cardsCars";
 import { RankConverter } from "../../../utils/rankConverter";
 import { Engangements, streetCred, WinRate } from "../../../utils/winRate";
@@ -14,19 +14,25 @@ const Profile = () => {
         <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
           <Box sx={{ display: "flex", gap: 2 }}>
             <Box sx={{ position: "relative" }}>
-              <Box
+
+
+
+                {
+                  user?.foto_perfil? (
+                    <>
+                      <Box
                 component="img"
                 src={user?.foto_perfil }
-                sx={{
-                  width: { md: "200px", xs: "100%" },
-                  height: { md: "210px" },
-                  filter: "grayscale(100%)",
-                  "&:hover": {
-                    filter: "grayscale(0%)",
-                  },
-                }}
-              />
-              <Box
+                    sx={{
+                      width: { md: "200px", xs: "100%" },
+                      height: { md: "210px" },
+                      filter: "grayscale(100%)",
+                      "&:hover": {
+                        filter: "grayscale(0%)",
+                      },
+                    }}
+                  />
+                   <Box
                 sx={{
                   position: "absolute",
                   top: -10,
@@ -48,22 +54,61 @@ const Profile = () => {
                   borderRight: "3px solid #00f0ff",
                 }}
               />
+                    </>
+                  )
+            :
+
+              <Box sx={{width:200,height:210,display:"flex",justifyContent:"center",alignItems:"center"}}>
+
+                   <Avatar
+                src={user?.foto_perfil ?? undefined}
+                sx={{
+                  width: 150,
+                  height: 150,
+                  border: "4px solid white",
+                  boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
+                  fontSize: 40,
+                }}
+              >
+                {!user?.foto_perfil && user?.username
+                  ? <Typography variant="h2">{user.username[0].toUpperCase()}</Typography>
+                  : !user?.foto_perfil
+                    ? "?"
+                    : null}
+              </Avatar>
+
+              </Box>
+
+             
+                }
+              
+
+
+
+
+             
             </Box>
+
+
+            
             <Box sx={{ marginTop: 3, p: "0px 20px" }}>
               <Typography
                 variant="caption"
                 color="#94A3B8"
                 sx={{ lineHeight: 3, fontStyle: "italic" }}
               >
-                SYSTEM STATUS: ACTIVE ,{" "}
+                SYSTEM STATUS: ACTIVE {" "}
               </Typography>
               <Typography
                 variant="caption"
                 color="#2FF801"
                 sx={{ lineHeight: 3, fontStyle: "italic" }}
               >
-                {" "}
-                {user?.zona_pais} ({user?.zona_ciudad}){" "}
+                {
+                   user?.zona_pais && user?.zona_ciudad ? (<>,{user?.zona_pais} / {user?.zona_ciudad}</>):""
+                }
+
+               
               </Typography>
               <Typography
                 sx={{
@@ -269,8 +314,18 @@ const Profile = () => {
         </Box>
 
         <Box sx={{ p: 6 }}>
-          <Typography>Mi Vehiulo activo</Typography>
-          <CardsCars active={true} />
+             <Typography
+              sx={{
+                color:"white",
+                fontSize: "25px",
+                fontStyle: "italic",
+                borderLeft: "10px solid #ff6e81",
+                pl: 2,
+              }}
+            >
+              ACTIVE CARS
+            </Typography>          
+            <CardsCars active={true} />
         </Box>
       </Box>
     </PageWrapper>

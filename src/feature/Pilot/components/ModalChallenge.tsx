@@ -56,7 +56,7 @@ export default function ModalChallenge({ open,setOpen,initialData }: ModalChalle
   const {createChallenge} = UseChallanges()
 
 
-
+console.log("respectPilotData",respectPilotData)
 
 
  const handleClose = () => {
@@ -122,10 +122,6 @@ export default function ModalChallenge({ open,setOpen,initialData }: ModalChalle
                     <Stack spacing={2.5}> 
                     <SectionBlock label={"01 — PARTICIPANTES"}>
                       <Stack spacing={2.5}>
-                      {/* <DarkField  fullWidth size="small" name="retador_id" label="Retador" value={formData.retador_id}
-                        onChange={handleChange} placeholder="user_xxxx"
-                        InputProps={{ startAdornment:<InputAdornment position="start"><FlashOnIcon sx={{color:"#00f0ff",fontSize:18}}/></InputAdornment> }} /> */}
-
                       <DarkField 
                       select
                       fullWidth size="small" name="retado_id" label=" Retado" 
@@ -138,7 +134,11 @@ export default function ModalChallenge({ open,setOpen,initialData }: ModalChalle
                                 <MenuItem key={initialData.id} value={initialData.id}>
                                   {initialData.username}
                                 </MenuItem>
-                              ) : (
+                              ) : 
+
+                                respectPilotData?.length === 0 ? <Typography sx={{p:1,color:"red"}}>Necesitas conocer Pilotos </Typography> :
+                              
+                              (
                                 respectPilotData?.map((respect) => (
                                   <MenuItem key={respect.id} value={respect.id}>
                                     {respect.username}
@@ -171,41 +171,6 @@ export default function ModalChallenge({ open,setOpen,initialData }: ModalChalle
              
                 <Grid size={6}>
                   <Stack spacing={2.5}> 
-                  {/* <SectionBlock label={"03-  VEHÍCULOS"}>
-                      <Stack spacing={2.5}>
-                     <DarkField name="vehiculo_retador_id" fullWidth size="small" label="Vehículo del Retador" value={formData.vehiculo_retador_id}
-                      onChange={handleChange} placeholder="vehicle_xxxx" 
-                      InputProps={{ startAdornment:<InputAdornment position="start"><DirectionsCarIcon sx={{color:"#00f0ff",fontSize:18}}/></InputAdornment> }} /> 
-
-
-                     <DarkField 
-                    select
-                    name="vehiculo_retado_id" fullWidth size="small" label="Vehículo del Retado" value={formData.vehiculo_retado_id}
-                      onChange={handleChange} placeholder="vehicle_xxxx" 
-                      InputProps={{ startAdornment:<InputAdornment position="start"><DirectionsCarIcon sx={{color:"#555",fontSize:18}} /> 
-                      </InputAdornment> }} >
-
-                        {
-                          initialData? 
-                            <MenuItem key={initialData.id} value={initialData.id_vehiculo}>
-                                  {initialData.modelo}
-                            </MenuItem>:
-                            (
-                              respectPilotData?.map((respect) => (
-                                  <MenuItem key={respect.id} value={respect.id_vehiculo}>
-                                    {respect.modelo}
-                                  </MenuItem>
-                                ))
-                            )
-                        }
-
-                      </DarkField> 
-
-
-
-                      </Stack>
-                  </SectionBlock> */}
-
                   <SectionBlock label={"04 — LUGAR Y FECHA"}>
                       <Stack spacing={2.5}> 
                     <DarkField name="ubicacion_acordada" fullWidth size="small" label="Ubicación Acordada" value={formData.ubicacion_acordada}
@@ -240,7 +205,7 @@ export default function ModalChallenge({ open,setOpen,initialData }: ModalChalle
 
             </Grid>
 
-          <ButtonCustom onClick={() =>handlerCreateChanllenge() }>
+          <ButtonCustom disabled={ respectPilotData?.length === 0 } onClick={() =>handlerCreateChanllenge() }>
             <SportsScoreIcon/> <Typography sx={{ml:1}} >LANZAR RETO </Typography>
           </ButtonCustom>
         </Box>

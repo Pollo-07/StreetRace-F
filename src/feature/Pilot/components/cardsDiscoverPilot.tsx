@@ -13,6 +13,7 @@ import { Engangements, streetCred, WinRate } from "../../../utils/winRate";
 import { RankConverter } from "../../../utils/rankConverter";
 import ModalChallenge from "./ModalChallenge";
 import type { DiscoverUserWithVehicle } from "../../../types/vehicleTypes";
+import { useNavigate } from "react-router-dom";
 
 
 //   {
@@ -43,6 +44,7 @@ const CardsDiscoverPilot = () => {
 const [enableScroll, setEnableScroll] = useState(false);
   const [open, setOpen] = useState(false);
   const [initialData, setInitialData] = useState<DiscoverUserWithVehicle>();
+  const navigate = useNavigate()
   
     const handleOpen = (pilot:DiscoverUserWithVehicle) => {
      setInitialData(pilot)
@@ -56,13 +58,15 @@ const [enableScroll, setEnableScroll] = useState(false);
    const car= "https://lh3.googleusercontent.com/aida-public/AB6AXuCWERGK2no66i6d2VnOOGDJrv5uGZkn_rOqwWVqln4UVYL8ajA9xKjN0FGGd5R33hXkv1KhDxfhBKjYmgC3PYnMY6sPpjrSvSinsA1EyAwP-ssYFYcx_bq7_7ybQoI246BjQeaPvwpZkFfzr1SyYqvivQSus5ZgXuDsZedP_BtS2EokKqckwn3H046fwTbwB6p4y0SP3cEvzjYbhqxdy9fIifsyKvoSoKJ-GXeWJtclrI0By9ZyCzS9bI2wVgOzR7xvy7-HYke2TyxP"
   
 
-   console.log(respectPilotData,"respect")
-   console.log(discoverPilot,"discover")
 
 
-
+   console.log("dscober",discoverPilot)
   return (
-    <Box
+
+      <>
+      
+   {
+    discoverPilot?.length!==0 ? <Box
       sx={{
         height: "70vh",
        overflowY: enableScroll ? "scroll" : "hidden",
@@ -246,6 +250,16 @@ const [enableScroll, setEnableScroll] = useState(false);
    <ModalChallenge open={open} setOpen={setOpen} initialData={initialData}/>
 
     </Box>
+    : (<Box sx={{display:"flex",alignItems:"center",flexDirection:"column",justifyContent:"center",height:"60vh"}}>
+    <Typography sx={{color:"#00f0ff",textAlign:"center",mb:5,fontSize:35,fontStyle:"italic",fontWeight:600}}>PARA DESCUBRIR PILOTOS TIENE QUE CONFIGURAR TU ZONA</Typography>
+      <ButtonCustom   sx={{ width: 180,mx: "auto", display: "block"}} onClick={()=>navigate("/edituser")}>Ir</ButtonCustom>
+    </Box>)
+   }
+
+      
+      
+      </>
+    
   );
 };
 

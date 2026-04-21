@@ -7,6 +7,7 @@ import { useUser } from "../hooks/useUser";
 import StarPurple500OutlinedIcon from '@mui/icons-material/StarPurple500Outlined';
 import { ChallengeActions } from "../utils/challengeActions ";
 import ModalFinalizar from "../../../components/modalFinalizar";
+import ChallangeEmpty from "./challangeEmpty";
 type Props = {
   active?: boolean;
 };
@@ -37,9 +38,7 @@ const CardsChallenge = ({ active }: Props) => {
  
   return (
     <>
-      {!challengesFilter || challengesFilter.length === 0 ? (
-        <p style={{ color: "white" }}>No hay challenge activos</p>
-      ) : (
+      {!challengesFilter || challengesFilter.length === 0 ? <ChallangeEmpty/> : (
         challengesFilter.map((challenge, index) => {
 
           const soyRetador = userId === challenge.retador.id;

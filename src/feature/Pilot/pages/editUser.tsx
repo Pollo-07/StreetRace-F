@@ -64,11 +64,7 @@ export default function EditUser() {
 
      if (image) {
       formDataToSend.append("foto_perfil", image);
-    }
-        
-   console.log("formt",[...formDataToSend.entries()])
-
-    
+    }    
       updateUser(formDataToSend)
       
     } catch (error) {
@@ -143,22 +139,22 @@ export default function EditUser() {
             </Typography>
 
             <Box sx={{ position: "relative", mt: 1 }}>
-              <Avatar
-                src={preview ?? undefined}
-                sx={{
-                  width: 100,
-                  height: 100,
-                  border: "4px solid white",
-                  boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
-                  fontSize: 40,
-                }}
-              >
-                {!preview && formData.username
-                  ? formData.username[0].toUpperCase()
-                  : !preview
-                    ? "?"
-                    : null}
-              </Avatar>
+                <Avatar
+                  src={preview ?? undefined}
+                  sx={{
+                    width: 100,
+                    height: 100,
+                    border: "4px solid white",
+                    boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
+                    fontSize: 40,
+                  }}
+                >
+                  {!preview && formData.username
+                    ? formData.username[0].toUpperCase()
+                    : !preview
+                      ? "?"
+                      : null}
+                </Avatar>
 
               <Tooltip title="Cambiar foto">
                 <IconButton

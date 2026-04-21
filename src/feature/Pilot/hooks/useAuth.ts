@@ -38,7 +38,7 @@ export const useAuth = () => {
         role:data.user.role
       }) 
       showSuccess("Inicio de sesión exitoso");  
-      navigate("/dashboard");
+      navigate("/");
     },
     onError: (err) => {
       console.log("error",err)
@@ -47,11 +47,25 @@ export const useAuth = () => {
   });
 
   const register = useMutation({
-    mutationFn: (data: RegisterType) => Api.register(data),
+    mutationFn:async (data: RegisterType) => {
+      try {
+       const result=  await Api.register(data)
+       return result
+      } catch (error:any) {
+         
+         const message =
+                error?.response?.data?.error || "Error desconocido";
+              throw new Error(message); 
+      }
+    },
 
     onSuccess: () => {
       showSuccess("Registro exitoso. Por favor, inicia sesión.");
-      navigate("/login");
+      setTimeout(()=>{
+         navigate("/login");
+
+      },2000)
+     
     },
     onError: (err) => {
       showError(`Error al registrar el usuario ${err?.message || "Inténtalo de nuevo"}`,);
@@ -71,8 +85,6 @@ const refreshTokens = useMutation({
 
     onSuccess: ({ token ,id,role}) => {
         dispatch({ type: "SET_LOADING", payload: true })
-
-        console.log("refresh token",token)
 
       setAuthToken(token)
       queryClient.setQueryData<AuthData>(["auth"], {

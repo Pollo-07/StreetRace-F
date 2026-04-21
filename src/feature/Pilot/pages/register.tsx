@@ -1,14 +1,12 @@
 import {
   Box,
   Typography,
-    Button,
-  Checkbox,
-  FormControlLabel,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   FormHelperText,
+  Button,
 } from "@mui/material";
 
 import fondoregister from "../assets/fondo-register.png";
@@ -24,15 +22,16 @@ export const Register = () => {
   const { register } = useAuth();
 
   
-  const registerUser = (data: RegisterType) => {
-    register(data);
+  const registerUser = (data: RegisterType) => {    
+    const newData = {...data,role:"user"}
+      register(newData);
   };
 
   const {register:registerForm,handleSubmit,formState:{errors},control} = useForm<RegisterType>({
     resolver:zodResolver(RegisterSchema),
     mode:"onBlur",
       reValidateMode: "onBlur",
-     defaultValues:  { userName: "", password: "", email: "", tipo_categoria: "",protocol:false }
+     defaultValues:  { username: "", password_hash: "", email: "", tipo_categoria: "" }
   })
 
   return (
@@ -140,9 +139,9 @@ export const Register = () => {
               sx={{ display: "flex", flexDirection: "column", gap: 3 }}
             >
               <DarkField
-                 {...registerForm("userName")}
-                  error={!!errors.userName}
-                helperText={errors.userName?.message}
+                 {...registerForm("username")}
+                  error={!!errors.username}
+                helperText={errors.username?.message}
                 label="username"
                 variant="standard"
                 fullWidth
@@ -163,10 +162,10 @@ export const Register = () => {
               />
 
               <DarkField
-                 {...registerForm("password")}
-                 error={!!errors.password}
-                helperText={errors.password?.message}
-                name="password"
+                 {...registerForm("password_hash")}
+                 error={!!errors.password_hash}
+                helperText={errors.password_hash?.message}
+                name="password_hash"
                 label="password"
                 type="password"
                 variant="standard"
@@ -248,30 +247,7 @@ export const Register = () => {
                 CREATE PROFILE
               </Button>
 
-               <Controller
-                name="protocol"
-                control={control}
-                render={({ field }) => (
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        {...field}
-                        checked={field.value || false}
-                        sx={{ color: "#00f0ff","&.Mui-checked": {color: "#00f0ff", }, }}
-                      />
-                    }
-                    label={
-                      <Typography sx={{ fontSize: 12 }}>
-                        Accept Protocol
-                      </Typography>
-                    }
-                  />
-                )}/>
-       
-                {errors.protocol && (
-            <Typography sx={{ color: "red", fontSize: 12 }}>
-              {errors.protocol.message}
-            </Typography>)}
+               
             </Box>
           </Box>
         </Box>

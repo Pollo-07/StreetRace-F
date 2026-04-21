@@ -28,7 +28,6 @@ import DisputesPage from "../feature/admin/pages/disputesPage"
           <Route element={<RouterProtected roles={["user"]}/>}>
              <Route element={<Layout />}>
                 <Route index element={<Dashboard />} />
-                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/perfil" element={<Profile />} />
                 <Route path="/garage" element={<MyGarage />} />
                 <Route path="/challenges" element={<Challenge/>}></Route>

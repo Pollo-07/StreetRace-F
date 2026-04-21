@@ -23,7 +23,9 @@ const MyGarage = () => {
     setOpen(true)
 }
   const {vehicles} = UseVehicle()
+  const  vehicleActivo = vehicles?.find((item)=>item.activo)
 
+  console.log("vehicleActivo",vehicleActivo)
 
   const carImage =
     "https://images.unsplash.com/photo-1503376780353-7e6692767b70";
@@ -31,34 +33,25 @@ const MyGarage = () => {
   return (
     <PageWrapper>
         <Box sx={{ color: "white"}}>
-        
-        <Box sx={{position: "relative" }}>
+          {
+            vehicles?.length ===0 || vehicles &&  <Box sx={{position: "relative" }}>
             
             <Box
                 component="img"
-                src={carImage}
+                src={vehicleActivo?.foto}
                 sx={{
                 width: "100%",
                 height: "85vh",
                 objectFit: "cover",
                 borderRadius: "16px",
                 border: " rgba(255, 255, 255, 0.1)",
+                imageRendering: "auto"
                 }}
             />
 
         
       
-          <Box
-            sx={{
-                position: "absolute",
-            top: 12,
-            right: 5,
-              borderRadius: 50,
-              width: 20,
-              height: 20,
-              backgroundColor: "#2FF801",
-            }}/>
-     
+         
 
             <Box
                 sx={{
@@ -79,7 +72,7 @@ const MyGarage = () => {
                     variant="h3"
                     sx={{ fontWeight: 600, fontStyle: "italic", color: "gray" }}
                     >
-                    Ferrari
+                    {vehicleActivo?.marca}
                     </Typography>
                     <Typography
                     variant="h2"
@@ -90,7 +83,7 @@ const MyGarage = () => {
                         fontStyle: "italic",
                     }}
                     >
-                    F8 Tributo
+                   {vehicleActivo?.modelo}
                     </Typography>
                 </Box>
                 </Box>
@@ -132,7 +125,7 @@ const MyGarage = () => {
                             borderRadius: "50%",
                         }}
                         ></Box>
-                        <Typography>Red</Typography>
+                        <Typography> {vehicleActivo?.color}</Typography>
                     </Box>
                     </Box>
 
@@ -146,7 +139,7 @@ const MyGarage = () => {
                     }}
                     >
                     <Typography variant="body1">Placa</Typography>
-                    <Typography>XYZ866</Typography>
+                    <Typography>{vehicleActivo?.placa}</Typography>
                     </Box>
                     <Box
                     sx={{
@@ -158,7 +151,7 @@ const MyGarage = () => {
                     }}
                     >
                     <Typography variant="body1">Yaer</Typography>
-                    <Typography>2022</Typography>
+                    <Typography>{vehicleActivo?.año}</Typography>
                     </Box>
                 </Box>
 
@@ -183,17 +176,7 @@ const MyGarage = () => {
                         p: 1,
                         }}
                     >
-                        <Typography variant="body2">Llanata preminun </Typography>
-                    </Box>
-
-                    <Box
-                        sx={{
-                        borderRadius: 5,
-                        border: "1px solid rgba(255,255,255,.2)",
-                        p: 1,
-                        }}
-                    >
-                        <Typography variant="caption">MOTOR K4T</Typography>
+                        <Typography variant="body2">{vehicleActivo?.modificaciones} </Typography>
                     </Box>
                     </Box>
                 </Box>
@@ -202,6 +185,11 @@ const MyGarage = () => {
 
 
         </Box>
+          }
+
+            
+        
+       
 
         <Box sx={{p:"10px 45px"}}>
 
@@ -214,7 +202,8 @@ const MyGarage = () => {
                           <CardsCars setOpen={setOpen} setMode={setMode} setDataEdit={setDataEdit}/>
 
                            {
-                    (vehicles?.length?? 0) <3 && <Box onClick={handleOpen} sx={{border:"1px solid rgba(255,255,255,.2)",width:150,height:150,borderRadius:"50%", display:"flex",alignItems:"center",justifyContent:"center", cursor:"pointer"}}>  
+                    (vehicles?.length?? 0) < 3 && (vehicles?.length?? 0) !==0  && <Box onClick={handleOpen} sx={{border:"1px solid rgba(255,255,255,.2)",width:150,height:150,borderRadius:"50%", display:"flex",alignItems:"center",justifyContent:"center", cursor:"pointer"}}>  
+
                       <ControlPointIcon/>
                 </Box>
                   }

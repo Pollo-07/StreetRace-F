@@ -32,9 +32,10 @@ const initialForm:VehicleForm= {
   tipo_vehiculo: "",
   marca: "",
   modelo: "",
-  año: "",
+  anio: "",
   color: "",
   placa: "",
+  foto:null,
 };
 
 function ModalCars({
@@ -87,39 +88,43 @@ function ModalCars({
   const removeMod = (mod: string) =>
     setModifications(modifications.filter((m) => m !== mod));
 
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+      const formDataToSend = new FormData()
 
-    const newFormData = { ...formData, 
-      user_id,
-       modificaciones: modifications.length > 0 
-    ? modifications.join(",") 
-    : ""
-    };   
+  
+    formDataToSend.append("user_id", user_id?? "");
+    formDataToSend.append("tipo_vehiculo", formData.tipo_vehiculo);
+     formDataToSend.append("marca", formData.marca);
+    formDataToSend.append("modelo", formData.modelo);
+     formDataToSend.append("anio", formData.anio);
+    formDataToSend.append("color", formData.color);
+    formDataToSend.append("placa", formData.placa);
+    formDataToSend.append("modificaciones",  modifications.join(","));
 
-    const cleanData = Object.fromEntries(
-  Object.entries(newFormData).filter(([_, value]) => value !== "") 
-) as VehicleForm
+   
+    if (photo) {
+      formDataToSend.append("foto", photo);
+    }
 
-    console.log(cleanData)
+
+
     try {
       setLoading(true);
-      CreateVehicle(cleanData)
+      console.log(Object.fromEntries(formDataToSend.entries()))
+       CreateVehicle(formDataToSend)
     }catch (error) {
       console.log(error,"error tryc catch");
   } finally{
       resetForm()
       setLoading(false);
       setSuccess(true)
-      handleClose();
+      setModifications([])
+      setPhotoPreview("")
     }
      
   };
-
-
-
-
-
 
   const handleClose = () => {
   resetForm(initialForm);
@@ -128,6 +133,7 @@ function ModalCars({
   setPhotoPreview(null);
   setOpen(false);
 };
+
  useEffect(() => {
   if (open && initialData) {
     resetForm(initialData);
@@ -282,8 +288,8 @@ function ModalCars({
 
                     <DarkField
                       label="Año"
-                      name="año"
-                      value={formData.año}
+                      name="anio"
+                      value={formData.anio}
                       onChange={handleChange}
                     ></DarkField>
                   </Box>

@@ -66,7 +66,7 @@ export const Api = {
 
 
   // VEHICLES//
-  createVehicle: ( data: VehicleForm) =>api.post("vehicles/createVehicle", data),
+  createVehicle: ( data: any) =>api.post("vehicles/createVehicle", data),
   allVehicle: () =>  api.get(`vehicles/allVehicles`,),
   activeVehicle:(id:string)=> api.patch(`vehicles/activeVehicle/${id}`),
    deleteVehicle:(id:string)=> api.delete(`vehicles/deleteVehicle/${id}`,),

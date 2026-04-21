@@ -1,8 +1,9 @@
 //* Vehiculo/
 
 
+
 export type Vehiculo = {
-  activo:boolean,
+activo:boolean,
 año:number,
 color:string,
 foto:string,
@@ -14,18 +15,16 @@ marca:string
 modelo:string
 }
 
-export type VehiculoResponse={
-  ok:boolean,
-  result:Vehiculo[]
-}
+
 export type VehicleForm ={
     user_id:string | undefined,
   tipo_vehiculo: string;
   marca: string;
   modelo: string;
-  año: string;
+  anio: string;
   color: string;
   placa: string;
+  foto: File | null
 }
 
 export type DiscoverUserWithVehicle = {

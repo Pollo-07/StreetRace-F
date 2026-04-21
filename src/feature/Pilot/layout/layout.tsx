@@ -10,6 +10,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
 import MenuPopever from "../components/popover";
+import CompleteProfileModal from "../components/completeProfileModal";
+
 
 
 const Layout = () => {
@@ -105,6 +107,8 @@ const Layout = () => {
           
           
         </Box>
+
+        <CompleteProfileModal/>
 
       </Box>
     </Box>

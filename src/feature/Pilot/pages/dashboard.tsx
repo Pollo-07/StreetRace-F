@@ -17,6 +17,8 @@ const Dashboard = () => {
   
 
 
+
+      console.log(challengesSize)
   return (
     <PageWrapper>
       <Box sx={{ width: "100%", height: "auto", pb: 5 }}>
@@ -49,7 +51,7 @@ const Dashboard = () => {
               ACTIVE CHALLENGES
             </Typography>
             {
-              challengesSize !==0 &&  <Box
+              challengesSize !==0 || challengesSize === undefined &&  <Box
               sx={{
                 border: "1px solid red",
                 padding: 0.5,
@@ -79,6 +81,17 @@ const Dashboard = () => {
         </Box>
 
         <Box sx={{ p: "25px 0px 0px 47px"}}>
+            <Typography
+              sx={{
+                color:"white",
+                fontSize: "25px",
+                fontStyle: "italic",
+                borderLeft: "10px solid #ff6e81",
+                pl: 2,
+              }}
+            >
+              ACTIVE CARS
+            </Typography>
           <CardsCars active={true}/>
         </Box>
       </Box>

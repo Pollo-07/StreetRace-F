@@ -2,7 +2,7 @@ import {  useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import UseAppSnackbar from "./useAppSnackbar";
 import { Api } from "../../../services/api";
-import type { VehicleForm, VehiculoResponse } from "../../../types/vehicleTypes";
+import type { Vehiculo,  } from "../../../types/vehicleTypes";
 const  UseVehicle = () => {
 
   
@@ -17,7 +17,9 @@ const queryClient = useQueryClient();
     queryFn: async() => {
         try {
     const response = await Api.allVehicle();
-    return response.data as VehiculoResponse;
+    console.log("INVALIDANDO...");
+    console.log(response);
+    return response.data.result as Vehiculo[];
   } catch (err: any) {
     throw new Error(err.response?.data?.error || "Error desconocido");
   }
@@ -25,11 +27,11 @@ const queryClient = useQueryClient();
  })
 
  const CreateVehicle = useMutation({
-        mutationFn: async(data:VehicleForm) => { 
+        mutationFn: async(data:any) => { 
           try {
-             const updateVhicle = await Api.createVehicle(data)
+             const result = await Api.createVehicle(data)
         
-            return updateVhicle.data
+            return result.data
             
           } catch (error:any) {
 
@@ -76,25 +78,31 @@ const queryClient = useQueryClient();
 
     const deleteVehicle = useMutation({
       mutationFn:async(id:string)=>{
-        const result = await Api.deleteVehicle(id)
-        return result
+        try {
+           const result = await Api.deleteVehicle(id)
+           console.log("delete vehicle",result.data)
+        return result.data.message
+        } catch (error:any) {
+          const message =
+                error?.response?.data?.error || "Error desconocido";
+              throw new Error(message); 
+        }
       },
 
       onSuccess(){
-        
-          showSuccess("se ha eliminado el vehiculo")
-           queryClient.invalidateQueries({ queryKey: ["vehicles"] });
+         queryClient.invalidateQueries({ queryKey: ["vehicles"] });
+         queryClient.setQueryData(["vehicles"], [])
+          showSuccess("se ha eliminado el vehiculo")  
+          
       },
-
-      onError() {
-        showError("no se ha podido elimiar el vehiculo")
-        
+      onError(error) {
+        showError(`no se ha podido elimiar el vehiculo ${error?.message}`)
       },
     })
 
     
   return { 
-    vehicles:data?.result,
+    vehicles:data,
     isLoadingVehicles:isLoading,
     errorVehicles:error,
     CreateVehicle : CreateVehicle.mutate,
