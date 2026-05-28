@@ -15,24 +15,23 @@ const Challenge = () => {
 
     const {vehicles,isLoadingVehicles} = UseVehicle()
 
-    // console.log(isLoadingVehicles)
-    //   if (isLoadingVehicles) {
-    //     return (
-    //       <Box
-    //         sx={{
-    //           display: "flex",
-    //           justifyContent: "center",
-    //           alignItems: "center",
-    //           height: "100vh",
-    //           fontSize: "1.5rem",
-    //           fontWeight: "bold",
-    //           color:"white"
-    //         }}
-    //       >
-    //         Cargando sesión...
-    //       </Box>
-    //     );
-    //   }
+      if (isLoadingVehicles) {
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              color:"white"
+            }}
+          >
+            Cargando sesión...
+          </Box>
+        );
+      }
 
 
 

@@ -1,5 +1,4 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import img_prueba from "../assets/img-prueba.png";
 import { WinRate } from "../../../utils/winRate";
 import UseChallanges from "../hooks/useChallenges";
 import { useState } from "react";
@@ -15,11 +14,13 @@ type Props = {
 const CardsChallenge = ({ active }: Props) => {
   const [open, Setopen] = useState<boolean>(true);
 
+
   const [selectedChallenge, setSelectedChallenge] = useState<any>(null);
   const { challenges } = UseChallanges();
 
   const { user } = useUser();
   const userId = user?.id;
+  const imge_default = "https://res.cloudinary.com/di2pvfv0q/image/upload/v1779989724/default-avatar-icon-of-social-media-user-vector_ygyfmk.jpg";
 
   const challengesFilter = active
     ? challenges?.filter(
@@ -96,7 +97,7 @@ const CardsChallenge = ({ active }: Props) => {
                    
                     <Box
                       component="img"
-                      src={ (soyRetador ? challenge.retado.foto_perfil : challenge.retador.foto_perfil) || img_prueba}
+                      src={ (soyRetador ? challenge.retado.foto_perfil : challenge.retador.foto_perfil) || imge_default}
                       sx={{ width: 100, height: 100, border: "1px solid #00f0ff", objectFit: "cover" }}
                     />
 
