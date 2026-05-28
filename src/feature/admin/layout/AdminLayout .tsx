@@ -1,11 +1,9 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import FlagIcon from "@mui/icons-material/Flag";
 import PeopleIcon from "@mui/icons-material/People";
-import AssessmentIcon from "@mui/icons-material/Assessment";
-import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuPopever from "../../Pilot/components/popover";
@@ -14,8 +12,7 @@ const navItems = [
      { label: "Challenges Disputed", path: ".", icon: <FlagIcon /> },
   { label: "Ranking", path: "rankingPage", icon: <DashboardIcon /> },
   { label: "Pilots", path: "pilotManagement", icon: <PeopleIcon /> },
-  { label: "Reportes", path: "reportes", icon: <AssessmentIcon /> },
-  { label: "Configuración", path: "config", icon: <SettingsIcon /> },
+
 ];
 
 const AdminLayout = () => {
@@ -65,10 +62,8 @@ const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: 1,
-            justifyContent: "space-between",
+            gap: 5,
             height: "50%",
-            mt: 2,
           }}
         >
          {navItems.map((item) => (
@@ -88,10 +83,8 @@ const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
           py: 1.2,
           borderRadius: 2,
           cursor: "pointer",
-
           bgcolor: isActive ? "rgba(0,240,255,0.1)" : "transparent",
           color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
-
           border: isActive
             ? "1px solid rgba(0,240,255,0.3)"
             : "1px solid transparent",

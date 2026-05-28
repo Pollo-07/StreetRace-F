@@ -86,7 +86,7 @@ const [page, setPage] = useState(1)
                 value={search}
                 onChange={(e:any) => {
                   setSearch(e.target.value);
-                  setPage(1); // 🔥 reset página
+                  setPage(1); 
                 }}
               />
            </Box>

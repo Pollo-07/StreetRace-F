@@ -2,7 +2,6 @@ import {Routes,Route} from "react-router-dom"
 import Register from "../feature/Pilot/pages/register"
 import Login from "../feature/Pilot/pages/login"
 import RouterProtected from "./appProtected"
-import Admin from "../feature/admin/pages/admin"
 import Layout from "../feature/Pilot/layout/layout"
 import Dashboard from "../feature/Pilot/pages/dashboard"
 import Profile from "../feature/Pilot/pages/profile"
@@ -22,10 +21,7 @@ import AdminLayout from "../feature/admin/layout/AdminLayout "
      <Route path="/register" element={<Register/>} />
      <Route path="/login" element={<Login/>} />
 
-     <Route element={<RouterProtected/>}>
-          <Route path="/admin" element={<Admin/>} />
-     </Route>
-
+  
           <Route element={<RouterProtected roles={["user"]}/>}>
              <Route element={<Layout />}>
                 <Route index element={<Dashboard />} />

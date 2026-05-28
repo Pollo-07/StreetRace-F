@@ -13,7 +13,7 @@ export default function PilotCardEdit({setPilotData,user}:PilotCardEditPops) {
 
 
 
-   const  image= "https://i.pravatar.cc/100?img=1"
+  const imge_default = "https://res.cloudinary.com/di2pvfv0q/image/upload/v1779989724/default-avatar-icon-of-social-media-user-vector_ygyfmk.jpg";
 
 
   return (
@@ -26,13 +26,14 @@ export default function PilotCardEdit({setPilotData,user}:PilotCardEditPops) {
           sx={{
             mb: 2,
             bgcolor: "#0C0C15",
-            borderLeft: `3px solid #BC13FE}`,
+            borderLeft: `3px solid #BC13FE`,
+            cursor: "pointer",
           }}
         >
           <CardContent sx={{ display: "flex", alignItems: "center", gap: 2,"&:hover": { bgcolor: "#1f1f1f" },
  }}>
             <Avatar
-              src={image}
+              src={user.foto_perfil || imge_default}
               sx={{
                 border:"1px solid red",
                 width: 64,
