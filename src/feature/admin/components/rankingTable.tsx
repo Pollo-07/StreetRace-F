@@ -18,6 +18,7 @@ export default function RankingTable() {
 
 
     const {userAll} = useAdmin()
+    
     const image =  "https://res.cloudinary.com/di2pvfv0q/image/upload/v1779989724/default-avatar-icon-of-social-media-user-vector_ygyfmk.jpg";
 
 
@@ -55,7 +56,7 @@ export default function RankingTable() {
             <TableCell>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <Avatar
-                  src={image}
+                  src={row.foto_perfil || image}
                   sx={{
                     border:"1px solid red",
                     width: 64,

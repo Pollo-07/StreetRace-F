@@ -51,7 +51,7 @@ export default function Podium() {
 
         <Box>
                   <Avatar
-                  src={image}
+                  src={pilot.foto_perfil || image}
                   sx={{
                     width: index===1 ? 150 : 120,
                     height: index===1 ? 150 : 120,
