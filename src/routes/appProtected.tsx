@@ -17,7 +17,7 @@ const RouterProtected = ({roles}:propsRouterProtected) => {
   const token  = auth?.token
   const role = auth?.role as ROLES
 
-  if(!token) return <Navigate to={"/login"} replace />
+  // if(!token) return <Navigate to={"/login"} replace />
 
 
   if (roles && role && !roles.includes(role)) {

@@ -1,5 +1,4 @@
 import { Box, Typography, Button, Avatar } from "@mui/material";
-import image from "../../Pilot/assets/img-prueba.png";
 import { useAdmin } from "../hooks/useAdmin";
 import { useState } from "react";
 import DisputeOpinionModal from "../../Pilot/components/modalDisputa";
@@ -9,7 +8,7 @@ export const DisputeCard = () => {
   const [open, Setopen] = useState<boolean>(false);
   const [Select, SetSelect] = useState<any>("");
 
-  console.log(challengeDisputed);
+const image =  "https://res.cloudinary.com/di2pvfv0q/image/upload/v1779989724/default-avatar-icon-of-social-media-user-vector_ygyfmk.jpg";
 
   return (
     <Box>

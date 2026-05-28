@@ -8,7 +8,6 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
-import image from "../../Pilot/assets/img-prueba.png"
 import { useAdmin } from "../hooks/useAdmin";
 import { getStreetCredValue, streetCred } from "../../../utils/winRate";
 import { RankConverter } from "../../../utils/rankConverter";
@@ -19,8 +18,9 @@ export default function RankingTable() {
 
 
     const {userAll} = useAdmin()
+    const image =  "https://res.cloudinary.com/di2pvfv0q/image/upload/v1779989724/default-avatar-icon-of-social-media-user-vector_ygyfmk.jpg";
 
-    console.log(userAll)
+
   return (
     <Table sx={{ bgcolor: "#000"   }}>
       <TableHead>
