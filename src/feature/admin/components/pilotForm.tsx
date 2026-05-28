@@ -33,12 +33,12 @@ export default function PilotForm({PilotData}:PilotFormProps) {
   useEffect(()=>{
   if(PilotData){
     resetForm({
-    username:PilotData.username,
-    email:PilotData.email,
-    zona_localidad:PilotData.zona_localidad,
-    zona_estado:PilotData.zona_estado,
-    zona_pais:PilotData.zona_pais,
-     zona_ciudad:PilotData.zona_ciudad
+    username:PilotData.username?? "",
+    email:PilotData.email?? "",
+    zona_localidad:PilotData.zona_localidad?? "",
+    zona_estado:PilotData.zona_estado?? "",
+    zona_pais:PilotData.zona_pais?? "",
+     zona_ciudad:PilotData.zona_ciudad?? ""
       
     })
   }
@@ -55,13 +55,10 @@ export default function PilotForm({PilotData}:PilotFormProps) {
 
   }
   
-
-
   const handlerDeleteUser =(id:string)=>{
-    console.log(id)
     deleteUser(id)
-
   }
+  
 
 
 
