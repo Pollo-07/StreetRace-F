@@ -92,10 +92,12 @@ const CardsChallenge = ({ active }: Props) => {
 
                 <Box sx={{ flex: 1, }}>
                   <Box sx={{ position: "relative" }}>
+
+                   
                     <Box
                       component="img"
-                      src={img_prueba}
-                      sx={{ width: 100, border: "1px solid #00f0ff" }}
+                      src={ (soyRetador ? challenge.retado.foto_perfil : challenge.retador.foto_perfil) || img_prueba}
+                      sx={{ width: 100, height: 100, border: "1px solid #00f0ff", objectFit: "cover" }}
                     />
 
                     <Box
