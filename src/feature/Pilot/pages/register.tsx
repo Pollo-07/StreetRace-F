@@ -25,13 +25,15 @@ export const Register = () => {
   const registerUser = (data: RegisterType) => {    
     const newData = {...data,role:"user"}
       register(newData);
+
+      console.log(newData)
   };
 
   const {register:registerForm,handleSubmit,formState:{errors},control} = useForm<RegisterType>({
     resolver:zodResolver(RegisterSchema),
     mode:"onBlur",
       reValidateMode: "onBlur",
-     defaultValues:  { username: "", password_hash: "", email: "", tipo_categoria: "" }
+     defaultValues:  { username: "", password_hash: "", email: "", categoria_id: "" }
   })
 
   return (
@@ -189,7 +191,7 @@ export const Register = () => {
                     borderBottom: "2px solid #00f0ff",
                   },
                 }}
-                error={!!errors.tipo_categoria}
+                error={!!errors.categoria_id}
               >
                 <InputLabel
                   sx={{
@@ -203,8 +205,7 @@ export const Register = () => {
 
               
                   <Controller
-                   name="tipo_categoria"
-                   
+                   name="categoria_id"
                    control={control}
                    render={({ field }) => (
                       <Select
@@ -216,9 +217,9 @@ export const Register = () => {
                         "& .MuiSvgIcon-root": { color: "#b9cacb" },
                       }}
                 >
-                  <MenuItem value="Stock">Stock</MenuItem>
-                  <MenuItem value="Modified">Modified</MenuItem>
-                  <MenuItem value="Pro">Pro</MenuItem>
+                  <MenuItem value="8D79FD6E-3F69-41AC-86E9-F060F709C984">Stock</MenuItem>
+                  <MenuItem value="FAC8B220-86CB-415E-AEB5-4C8B8993626B">Modified</MenuItem>
+                  <MenuItem value="A9D5EF12-8C09-4315-95C6-78DCCB2B835C">Pro</MenuItem>
                 </Select>
                      )}
                   >
@@ -227,7 +228,7 @@ export const Register = () => {
 
 
                  <FormHelperText>
-                        {errors.tipo_categoria?.message}
+                        {errors.categoria_id?.message}
                   </FormHelperText>
               </FormControl>
 

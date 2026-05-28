@@ -4,7 +4,8 @@ import type { UserAction, UserActionTypes} from "../../../types/userTypes";
 export const initialUserState:UserActionTypes = {
     token:"",
     user:null,
-    loading: true
+    loading: true,
+    notificaciones:[]
 }
 
 

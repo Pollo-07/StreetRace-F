@@ -6,20 +6,61 @@ const RaceNow = () => {
     <Box
       sx={{
         backgroundColor: "#00f0ff",
-        width: "445px",
-        height: 150,
-        p: 3,
-        marginBottom: 2,
-        cursor:"pointer",
-         "&:hover":{
-         background: "rgba(0, 240, 255, .8)"
-        }
+        width: {
+          xs: "100%", // 🔥 móvil ocupa todo
+          sm: "100%",
+          md: 445, // 🔥 desktop como lo tenías
+        },
+        height: {
+          xs: "auto",
+          sm: 140,
+          md: 150,
+        },
+        p: { xs: 2, sm: 3 },
+        mb: 2,
+        cursor: "pointer",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        "&:hover": {
+          background: "rgba(0, 240, 255, .8)",
+        },
       }}
     >
-      <SportsScoreOutlinedIcon sx={{ fontSize: 50 }} />
-      <Typography sx={{ fontWeight: 900, fontSize: 30 }}>RACE NOW</Typography>
-      <Typography variant="caption" sx={{ color: "grey" }}>
-        JION ACTIVE LOBBY
+      <SportsScoreOutlinedIcon
+        sx={{
+          fontSize: {
+            xs: 35,
+            sm: 45,
+            md: 50,
+          },
+        }}
+      />
+
+      <Typography
+        sx={{
+          fontWeight: 900,
+          fontSize: {
+            xs: 22,
+            sm: 26,
+            md: 30,
+          },
+        }}
+      >
+        RACE NOW
+      </Typography>
+
+      <Typography
+        variant="caption"
+        sx={{
+          color: "grey",
+          fontSize: {
+            xs: 10,
+            sm: 12,
+          },
+        }}
+      >
+        JOIN ACTIVE LOBBY
       </Typography>
     </Box>
   );

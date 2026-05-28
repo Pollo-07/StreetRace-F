@@ -13,7 +13,28 @@ const Challenge = () => {
   
     const handleOpen = () => setOpen(true);
 
-    const {vehicles} = UseVehicle()
+    const {vehicles,isLoadingVehicles} = UseVehicle()
+
+    // console.log(isLoadingVehicles)
+    //   if (isLoadingVehicles) {
+    //     return (
+    //       <Box
+    //         sx={{
+    //           display: "flex",
+    //           justifyContent: "center",
+    //           alignItems: "center",
+    //           height: "100vh",
+    //           fontSize: "1.5rem",
+    //           fontWeight: "bold",
+    //           color:"white"
+    //         }}
+    //       >
+    //         Cargando sesión...
+    //       </Box>
+    //     );
+    //   }
+
+
 
   return (
     <PageWrapper>
@@ -39,7 +60,10 @@ const Challenge = () => {
         <Box sx={{ display: "flex", gap: 2, alignItems: "center", flexWrap: "wrap",justifyContent:"center" }}>
           
           {
-           ( !vehicles || vehicles.length ===0) ?
+           ( vehicles && vehicles.length !==0) ?
+
+
+            <CardsChallenge />:
               <Box
                 sx={{
                   height: "60vh",
@@ -61,8 +85,8 @@ const Challenge = () => {
                   No es posible iniciar un challenge sin vehículos
                 </Typography>
               </Box>
-            :
-             <CardsChallenge />
+          
+            
              
               
           }

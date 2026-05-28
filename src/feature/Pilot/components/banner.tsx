@@ -7,40 +7,43 @@ const Banner = () => {
 
   const user = useUser().user
 
-
   return (
     <Card
       sx={{
         minWidth: 275,
-        width: 750,
-        height: "320px",
+        width: { xs: "100%", sm: "100%", md: 750 },
+        height: { xs: "auto", md: 320 },
         background: "#242442",
         color: "white",
         padding: 2,
         border: "1px solid rgba(0,240,255,0.2)",
+        mb:{xs:2}
       }}
     >
       <CardContent sx={{ position: "relative" }}>
+        
         <Typography
           sx={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            fontSize: "120px",
             fontWeight: 800,
             color: "rgba(255,255,255,0.05)",
             whiteSpace: "nowrap",
             userSelect: "none",
+            display: { xs: "none", sm: "block" },
+            fontSize: { sm: "90px", md: "120px" },
           }}
         >
           speed
         </Typography>
+
         <Box>
           <Typography
             variant="h5"
             sx={{
-              fontSize: { xs: 35, md: 60 },
+              fontSize: { xs: 28, sm: 40, md: 60 },
               fontWeight: 900,
               fontStyle: "italic",
               color: "#00f0ff",
@@ -49,7 +52,14 @@ const Banner = () => {
           >
             {user?.username}
           </Typography>
-          <Box sx={{ display: "flex", gap: 3, mt: 2 }}>
+
+          <Box
+            sx={{
+              display: "flex",
+              gap: 3,
+              mt: 2,
+            }}
+          >
             <Typography
               variant="caption"
               sx={{
@@ -57,10 +67,12 @@ const Banner = () => {
                 lineHeight: "15px",
                 backgroundColor: "#104153",
                 padding: 1,
+               
               }}
             >
               RANK: {RankConverter(user?.rango)}
             </Typography>
+
             <Typography
               variant="caption"
               sx={{
@@ -74,8 +86,21 @@ const Banner = () => {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ display: "flex", width: "100%", marginTop: "45px" }}>
-          <Box sx={{ flex: 1, px: 2, borderLeft: "1px solid #00F0FF" }}>
+              
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: {
+                xs: "wrap",   
+                sm: "wrap",   
+                lg: "nowrap"  
+              },
+            gap: 2,
+            width: "100%",
+            mt: { xs: 3, md: "45px" },
+          }}
+        >
+          <Box sx={{ flex: { flex: "1 1 45%"}, px: 2, borderLeft: "1px solid #00F0FF" }}>
             <Typography sx={{ color: "grey" }} variant="caption">
               TOTAL WINS
             </Typography>
@@ -84,7 +109,7 @@ const Banner = () => {
             </Typography>
           </Box>
 
-          <Box sx={{ flex: 1, px: 2, borderLeft: "1px solid red" }}>
+          <Box sx={{ flex: { flex: "1 1 45%" }, px: 2, borderLeft: "1px solid red" }}>
             <Typography sx={{ color: "grey" }} variant="caption">
               LOSES
             </Typography>
@@ -93,7 +118,7 @@ const Banner = () => {
             </Typography>
           </Box>
 
-          <Box sx={{ flex: 1, px: 2, borderLeft: "1px solid #2FD72F" }}>
+          <Box sx={{ flex: { flex: "1 1 45%" }, px: 2, borderLeft: "1px solid #2FD72F" }}>
             <Typography sx={{ color: "grey" }} variant="caption">
               WIN RATE
             </Typography>
@@ -102,7 +127,7 @@ const Banner = () => {
             </Typography>
           </Box>
 
-          <Box sx={{ flex: 1, px: 2, borderLeft: "1px solid #ECB2FF" }}>
+          <Box sx={{ flex: { flex: "1 1 45%" }, px: 2, borderLeft: "1px solid #ECB2FF" }}>
             <Typography sx={{ color: "grey" }} variant="caption">
               ENGANGEMENTS
             </Typography>
@@ -111,6 +136,7 @@ const Banner = () => {
             </Typography>
           </Box>
         </Box>
+
       </CardContent>
     </Card>
   );

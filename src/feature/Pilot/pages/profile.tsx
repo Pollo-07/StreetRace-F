@@ -6,326 +6,272 @@ import PageWrapper from "../components/pageWrapper";
 import { useUser } from "../hooks/useUser";
 
 const Profile = () => {
-  const user = useUser().user
+  const user = useUser().user;
 
   return (
     <PageWrapper>
-      <Box sx={{ color: "white", p: "70px 3px" }}>
-        <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
-          <Box sx={{ display: "flex", gap: 2 }}>
+      <Box
+        sx={{
+          color: "white",
+          p: { xs: 2, sm: 3, md: "70px 20px" },
+        }}
+      >
+        {/* 🔥 HEADER */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: {
+              xs: "column",
+              sm: "column",
+              md: "row",
+            },
+            alignItems: {
+              xs: "center",
+              sm: "center",
+              md: "flex-start",
+            },
+            gap: { xs: 2, sm: 3, md: 4 },
+          }}
+        >
+          {/* LEFT */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: {
+                xs: "column",
+                sm: "column",
+                md: "row",
+              },
+              alignItems: "center",
+              textAlign: { xs: "center", md: "left" },
+              gap: { xs: 2, sm: 3 },
+              flex: 1,
+            }}
+          >
+            {/* 🔥 IMAGE / AVATAR */}
             <Box sx={{ position: "relative" }}>
-
-
-
-                {
-                  user?.foto_perfil? (
-                    <>
-                      <Box
-                component="img"
-                src={user?.foto_perfil }
+              {user?.foto_perfil ? (
+                <>
+                  <Box
+                    component="img"
+                    src={user?.foto_perfil}
                     sx={{
-                      width: { md: "200px", xs: "100%" },
-                      height: { md: "210px" },
+                      width: { xs: 120, sm: 160, md: 200 },
+                      height: { xs: 130, sm: 170, md: 210 },
+                      objectFit: "cover",
                       filter: "grayscale(100%)",
+                      transition: "0.3s",
                       "&:hover": {
                         filter: "grayscale(0%)",
                       },
                     }}
                   />
-                   <Box
-                sx={{
-                  position: "absolute",
-                  top: -10,
-                  left: -10,
-                  width: 20,
-                  height: 20,
-                  borderTop: "3px solid #00f0ff",
-                  borderLeft: "3px solid #00f0ff",
-                }}
-              />
-              <Box
-                sx={{
-                  position: "absolute",
-                  bottom: 40,
-                  left: 190,
-                  width: 20,
-                  height: 20,
-                  borderBottom: "3px solid #00f0ff",
-                  borderRight: "3px solid #00f0ff",
-                }}
-              />
-                    </>
-                  )
-            :
 
-              <Box sx={{width:200,height:210,display:"flex",justifyContent:"center",alignItems:"center"}}>
-
-                   <Avatar
-                src={user?.foto_perfil ?? undefined}
-                sx={{
-                  width: 150,
-                  height: 150,
-                  border: "4px solid white",
-                  boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
-                  fontSize: 40,
-                }}
-              >
-                {!user?.foto_perfil && user?.username
-                  ? <Typography variant="h2">{user.username[0].toUpperCase()}</Typography>
-                  : !user?.foto_perfil
-                    ? "?"
-                    : null}
-              </Avatar>
-
-              </Box>
-
-             
-                }
-              
-
-
-
-
-             
+                  {/* Esquinas */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: -5,
+                      left: -5,
+                      width: 15,
+                      height: 15,
+                      borderTop: "3px solid #00f0ff",
+                      borderLeft: "3px solid #00f0ff",
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: -5,
+                      right: -5,
+                      width: 15,
+                      height: 15,
+                      borderBottom: "3px solid #00f0ff",
+                      borderRight: "3px solid #00f0ff",
+                    }}
+                  />
+                </>
+              ) : (
+                <Avatar
+                  sx={{
+                    width: { xs: 100, sm: 130, md: 150 },
+                    height: { xs: 100, sm: 130, md: 150 },
+                    border: "4px solid white",
+                    fontSize: 40,
+                  }}
+                >
+                  {user?.username
+                    ? user.username[0].toUpperCase()
+                    : "?"}
+                </Avatar>
+              )}
             </Box>
 
-
-            
-            <Box sx={{ marginTop: 3, p: "0px 20px" }}>
-              <Typography
-                variant="caption"
-                color="#94A3B8"
-                sx={{ lineHeight: 3, fontStyle: "italic" }}
-              >
-                SYSTEM STATUS: ACTIVE {" "}
+            {/* 🔥 INFO */}
+            <Box>
+              <Typography variant="caption" color="#94A3B8">
+                SYSTEM STATUS: ACTIVE
               </Typography>
-              <Typography
-                variant="caption"
-                color="#2FF801"
-                sx={{ lineHeight: 3, fontStyle: "italic" }}
-              >
-                {
-                   user?.zona_pais && user?.zona_ciudad ? (<>,{user?.zona_pais} / {user?.zona_ciudad}</>):""
-                }
 
-               
-              </Typography>
+              {user?.zona_pais && user?.zona_ciudad && (
+                <Typography variant="caption" color="#2FF801">
+                  {" "}
+                  ,{user.zona_pais} / {user.zona_ciudad}
+                </Typography>
+              )}
+
               <Typography
                 sx={{
                   color: "#00f0ff",
-                  fontSize: "80px",
                   fontWeight: 900,
                   fontStyle: "italic",
                   textShadow: "0 0 5px #00f0ff",
-                  marginTop: "-25px",
+                  fontSize: {
+                    xs: "40px",
+                    sm: "55px",
+                    md: "80px",
+                  },
                 }}
               >
                 {user?.username}
               </Typography>
 
-              <Box sx={{ display: "flex", gap: 2 }}>
-                <Box
+              {/* RANK + STREET */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: {
+                    xs: "column",
+                    sm: "row",
+                  },
+                  alignItems: "center",
+                  justifyContent: {
+                    xs: "center",
+                    md: "flex-start",
+                  },
+                  gap: 2,
+                  mt: 1,
+                }}
+              >
+                <Typography
                   sx={{
-                    display: "flex",
-                    gap: 5,
-                    height: "55px",
-                    alignItems: "flex-end",
+                    backgroundColor: "#1A1D2D",
+                    p: 1,
+                    borderLeft: "2px solid #00f0ff",
                   }}
                 >
-                  <Typography
-                    sx={{
-                      backgroundColor: "#1A1D2D",
-                      p: 1,
-                      borderLeft: "2px solid #00f0ff",
-                      color: "white",
-                    }}
-                  >
-                    RANK: {RankConverter(user?.rango)}
-                  </Typography>
-                </Box>
-                <Box
+                  RANK: {RankConverter(user?.rango)}
+                </Typography>
+
+                <Typography
                   sx={{
-                    display: "flex",
-                    gap: 5,
-                    height: "55px",
-                    alignItems: "flex-end",
+                    backgroundColor: "#1A1D2D",
+                    p: 1,
+                    borderLeft: "2px solid #2FF801",
+                    color: "#2FF801",
                   }}
                 >
-                  <Typography
-                    sx={{
-                      backgroundColor: "#1A1D2D",
-                      p: 1,
-                      borderLeft: "2px solid #2FF801",
-                      color: "#2FF801",
-                    }}
-                  >
-                    STREET CRED:{" "}
-                    {streetCred(user?.victorias, user?.derrotas, user?.rango)}
-                  </Typography>
-                </Box>
+                  STREET CRED:{" "}
+                  {streetCred(
+                    user?.victorias,
+                    user?.derrotas,
+                    user?.rango
+                  )}
+                </Typography>
               </Box>
             </Box>
           </Box>
+
+          {/* 🔥 RIGHT PANEL */}
           <Box
             sx={{
               backgroundColor: "#192232",
-              width: "350px",
-              height: "262px",
-              position: "relative",
-              bottom: "53px",
-              padding: 5,
+              width: {
+                xs: "100%",
+                sm: "80%",
+                md: 350,
+              },
+              margin: "0 auto",
+              p: { xs: 2, sm: 3 },
             }}
           >
-            <Box
-              sx={{
-                position: "absolute",
-                top: "48px",
-                left: "320px",
-                backgroundColor: "#2FF801",
-                borderRadius: "50%",
-                width: "10px",
-                height: "10px",
-              }}
-            ></Box>
-
             <Typography variant="caption" color="grey">
               GLOBAL PRECISION INDEX
             </Typography>
+
             <Typography
               sx={{
                 color: "#0ff0ff",
-                fontSize: "85px",
                 fontWeight: 900,
                 fontStyle: "italic",
+                fontSize: {
+                  xs: "45px",
+                  sm: "65px",
+                  md: "85px",
+                },
               }}
             >
               #42
-              <span
-                style={{ fontSize: 20, color: "#94A3B8", fontStyle: "italic" }}
-              >
+              <span style={{ fontSize: 14, color: "#94A3B8" }}>
                 / 1.2m
-              </span>{" "}
+              </span>
             </Typography>
+
             <Box
               sx={{
                 border: "1px solid #0ff0ff",
-                width: "258px",
+                width: "100%",
                 boxShadow: "0 0 5px #00f0ff",
+                my: 1,
               }}
-            ></Box>
-            <Typography variant="caption" color="grey" sx={{ lineHeight: 5 }}>
+            />
+
+            <Typography variant="caption" color="grey">
               TOP 0.1% WORLDWIDE / {RankConverter(user?.rango)}
             </Typography>
           </Box>
         </Box>
 
+        {/* 🔥 STATS */}
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
+            mt: 4,
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr 1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(4, 1fr)",
+            },
             gap: 1,
-            backgroundColor: "#0A0A12",
           }}
         >
-          <Box
-            sx={{
-              flex: 1,
-              border: "1px solid rgba(47,47,62,.3)",
-              p: 6,
-              "&:hover": {
-                backgroundColor: "rgba(47, 47, 62, 0.2)",
-                borderTop: "1px solid #00F0FF",
-              },
-            }}
-          >
-            <Typography
-              variant="caption"
-              sx={{ fontSize: 9, color: "#90A0B3" }}
-            >
-              Wins
-            </Typography>
-            <Typography color="#00F0FF" variant="h3">
-              {user?.victorias}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              flex: 1,
-              border: "1px solid rgba(47,47,62,.3)",
-              p: 6,
-              "&:hover": {
-                backgroundColor: "rgba(47, 47, 62, 0.2)",
-                borderTop: "1px solid red",
-              },
-            }}
-          >
-            <Typography
-              variant="caption"
-              sx={{ fontSize: 9, color: "#90A0B3" }}
-            >
-              Loses
-            </Typography>
-            <Typography color="#FF4B4B" variant="h3">
-              {user?.derrotas}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              flex: 1,
-              border: "1px solid rgba(47,47,62,.3)",
-              p: 6,
-              "&:hover": {
-                backgroundColor: "rgba(47, 47, 62, 0.2)",
-                borderTop: "1px solid #2FF801",
-              },
-            }}
-          >
-            <Typography
-              variant="caption"
-              sx={{ fontSize: 9, color: "#90A0B3" }}
-            >
-              PRECISION RATE
-            </Typography>
-            <Typography color="#2FF801" variant="h3">
-              {WinRate(user?.victorias, user?.derrotas)}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              flex: 1,
-              border: "1px solid rgba(47,47,62,.3)",
-              p: 6,
-              "&:hover": {
-                backgroundColor: "rgba(47, 47, 62, 0.2)",
-                borderTop: "1px solid white",
-              },
-            }}
-          >
-            <Typography
-              variant="caption"
-              sx={{ fontSize: 9, color: "#90A0B3" }}
-            >
-              ENGANGEMENTS
-            </Typography>
-            <Typography variant="h3">
-              {Engangements(user?.victorias, user?.derrotas)}
-            </Typography>
-          </Box>
+          <StatBox label="Wins" value={user?.victorias} color="#00F0FF" />
+          <StatBox label="Loses" value={user?.derrotas} color="#FF4B4B" />
+          <StatBox
+            label="PRECISION RATE"
+            value={WinRate(user?.victorias, user?.derrotas)}
+            color="#2FF801"
+          />
+          <StatBox
+            label="ENGANGEMENTS"
+            value={Engangements(user?.victorias, user?.derrotas)}
+          />
         </Box>
 
-        <Box sx={{ p: 6 }}>
-             <Typography
-              sx={{
-                color:"white",
-                fontSize: "25px",
-                fontStyle: "italic",
-                borderLeft: "10px solid #ff6e81",
-                pl: 2,
-              }}
-            >
-              ACTIVE CARS
-            </Typography>          
-            <CardsCars active={true} />
+        {/* 🔥 CARS */}
+        <Box sx={{ p: { xs: 2, sm: 3, md: 6 } }}>
+          <Typography
+            sx={{
+              fontSize: { xs: 18, sm: 22, md: 25 },
+              fontStyle: "italic",
+              borderLeft: "10px solid #ff6e81",
+              pl: 2,
+            }}
+          >
+            ACTIVE CARS
+          </Typography>
+
+          <CardsCars active={true} />
         </Box>
       </Box>
     </PageWrapper>
@@ -333,3 +279,26 @@ const Profile = () => {
 };
 
 export default Profile;
+
+/* 🔥 REUTILIZABLE */
+const StatBox = ({ label, value, color = "white" }: any) => (
+  <Box
+    sx={{
+      border: "1px solid rgba(47,47,62,.3)",
+      p: { xs: 2, sm: 3 },
+      textAlign: "center",
+      transition: "0.3s",
+      "&:hover": {
+        backgroundColor: "rgba(47, 47, 62, 0.2)",
+        borderTop: `1px solid ${color}`,
+      },
+    }}
+  >
+    <Typography variant="caption" sx={{ fontSize: 10, color: "#90A0B3" }}>
+      {label}
+    </Typography>
+    <Typography sx={{ color }} variant="h5">
+      {value}
+    </Typography>
+  </Box>
+);

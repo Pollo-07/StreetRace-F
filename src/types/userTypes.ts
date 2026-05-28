@@ -8,10 +8,26 @@ import type { LoginSchema, RegisterSchema } from "../utils/zodSchema";
 
  export type ROLES = "admin" |"user"
 
+
+
+export type Notification = {
+    id?: string;
+  user_id: string;
+  tipo: string;
+  mensaje:string;
+  leida: boolean;
+  referencia_id?: string ;
+  created_at?: string;
+}
+
+
+
+     
 export type UserActionTypes={
      token: string  | null;
      user: User | null;
      loading:boolean | null
+     notificaciones:Notification[]
 }
 
 export type UserForm ={
@@ -33,7 +49,10 @@ export type UserAction =
   | { type: "SET_USER"; payload:User| null }
   | { type: "LOGOUT"; payload: string | null }
   | { type: "SET_LOADING"; payload: boolean | null }
+  | { type: "SET_NOTIFICACIONES"; payload: Notification[]  }
+  | { type: "ADD_NOTIFICACIONES"; payload: Notification [] }
 
+  
 export type User = {
   id: string
   username: string
@@ -51,4 +70,7 @@ export type User = {
   estado: string
   CompetitionCategory?:string
 }
+
+// export type Notificationtype=  "reto_recibido" | "reto_aceptado" | "reto_rechazado" | "resultado" | "rango_subido" 
+
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { getAuthToken } from "./getAuthToken";
-import type { LoginType, RegisterType } from "../types/userTypes";
+import type { LoginType, Notification, RegisterType } from "../types/userTypes";
 import type { ChallengeForm } from "../types/challangeTypes";
 
 export const api = axios.create({
@@ -71,17 +71,21 @@ export const Api = {
 
 
   // CHALLENGES //
-  createChallenge: ( data:ChallengeForm ) =>api.post("challenges/createChallenge", data),
+  createChallenge: ( challenge:ChallengeForm,notification:Notification) =>api.post("challenges/createChallenge", {challenge,notification}),
   allChallenges: () =>api.get(`challenges/challengeAll`),
-  acceptChallenge: (id:string,id_retado:string) =>api.patch(`challenges/acceptChallenge`,{id,id_retado}),
-  rejectChallenge: (id:string,id_retado:string) =>api.patch(`challenges/rejectChallenge`,{id,id_retado}),
+  acceptChallenge: (id:string,id_retado:string,notification:Notification) =>api.patch(`challenges/acceptChallenge`,{id,id_retado,notification}),
+  rejectChallenge: (id:string,id_retado:string,notification:Notification) =>api.patch(`challenges/rejectChallenge`,{id,id_retado,notification}),
   cancelChallenge: (id:string) =>api.patch(`challenges/cancelChallenge`,{id}),
 
-  completeChallenge: (id:string,id_ganador:string,notas:string) => api.patch(`challenges/reporteChallenge`,{id,id_ganador,notas}),
+   completeChallenge: (id:string,id_ganador:string,notas:string,notification:Notification[]) => api.patch(`challenges/reporteChallenge`,{id,id_ganador,notas,notification}),
  
   startChallenge: (id:string) =>api.patch(`challenges/startChallenge`,{id}),
 
   
+//NOTIFICATION 
+  Notification: () => api.get("notification/",),
+  allNotificationsAsRead: () => api.patch("notification/allNotificationsAsRead",),
+
 
 
   //ADMIN

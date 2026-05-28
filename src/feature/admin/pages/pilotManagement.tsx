@@ -74,32 +74,22 @@ const [page, setPage] = useState(1)
                <ButtonCustom sx={{width:170}}  disabled={page === 1} onClick={prevPage}>ant</ButtonCustom>
              <ButtonCustom sx={{width:170}} disabled={page>=totalPages} onClick={nextPage}>sigu</ButtonCustom>
              </Box>
-           
-
-
 
            <Box sx={{display:"flex",alignItems:"center",gap:5}}>
                  <DarkField
                  sx={{"& .MuiInputBase-root": {
                      height: "56px",
+                      border:"1px solid #00f0ff"
                   },}}
-                  
-              size="small"
+                 size="small"
                 placeholder="buscar piloto"
-             
                 value={search}
                 onChange={(e:any) => {
                   setSearch(e.target.value);
                   setPage(1); // 🔥 reset página
                 }}
               />
-
-    
-
            </Box>
-          
-         
-
         </Box>
       </Box>
 

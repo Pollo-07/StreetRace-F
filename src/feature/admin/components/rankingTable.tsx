@@ -19,6 +19,8 @@ export default function RankingTable() {
 
 
     const {userAll} = useAdmin()
+
+    console.log(userAll)
   return (
     <Table sx={{ bgcolor: "#000"   }}>
       <TableHead>

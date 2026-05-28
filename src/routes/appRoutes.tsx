@@ -13,6 +13,7 @@ import DiscoverPilot from "../feature/Pilot/pages/discoverPilot"
 import RankingPage from "../feature/admin/pages/rankingPage"
 import PilotManagement from "../feature/admin/pages/pilotManagement"
 import DisputesPage from "../feature/admin/pages/disputesPage"
+import AdminLayout from "../feature/admin/layout/AdminLayout "
 
  const AppRoutes = () => {
   return (
@@ -40,9 +41,11 @@ import DisputesPage from "../feature/admin/pages/disputesPage"
 
 
             <Route element={<RouterProtected roles={["admin"]} />}>
-              <Route path="/disputedChallenges" element={<DisputesPage/>}></Route>
-                <Route path="/rankingPage" element={<RankingPage/>}></Route>
-               <Route path="/PilotManagement" element={<PilotManagement/>}></Route>
+           <Route path="/admin" element={<AdminLayout/>}>
+              <Route index element={<DisputesPage/>} />
+               <Route path="rankingPage" element={<RankingPage/>} />
+               <Route path="pilotManagement" element={<PilotManagement/>} />
+               </Route>
             </Route>
            
         

@@ -3,6 +3,7 @@ import UseVehicle from "../hooks/useVehicle";
 import CloseIcon from "@mui/icons-material/Close";
 import type { Vehiculo } from "../../../types/vehicleTypes";
 import CardsEmpty from "./cardsEmpty";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 type Props = {
   active?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -78,20 +79,42 @@ const CardsCars = ({ active, setOpen, setMode, setDataEdit }: Props) => {
               }}
             >
               <Box sx={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                <Box
-                  component="img"
-                  src={vehiculo.foto}
-                  alt="Car"
-                  sx={{
-                    width: "400px",
-                    height: "250px",
-                    objectFit: "cover",
-                    transition: "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)",
-                    "&:hover": {
-                      transform: "scale(1.1)",
-                    },
-                  }}
-                />
+               
+
+               {vehiculo.foto ? (
+                        <Box
+                          component="img"
+                          src={vehiculo.foto}
+                          alt="Car"
+                          sx={{
+                            width: "100%",
+                            height: "250px",
+                            objectFit: "cover",
+                            display: "block",
+                            transition: "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)",
+                            "&:hover": { transform: "scale(1.1)" },
+                          }}
+                        />
+                      ) : (
+                        <Box
+                          sx={{
+                            width: "100%",
+                            height: "250px",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            backgroundColor: "#1a1a2e",
+                            border: "1px dashed #00f0ff",
+                            gap: 1,
+                          }}
+                        >
+                          <DirectionsCarIcon sx={{ fontSize: 60, color: "#00f0ff", opacity: 0.4 }} />
+                          <Typography variant="caption" color="#838392">
+                            Sin foto
+                          </Typography>
+                        </Box>
+                      )}
 
                 <Typography
                   variant="body1"

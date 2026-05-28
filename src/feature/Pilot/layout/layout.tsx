@@ -1,4 +1,4 @@
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography, IconButton, Badge } from "@mui/material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -11,17 +11,28 @@ import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
 import MenuPopever from "../components/popover";
 import CompleteProfileModal from "../components/completeProfileModal";
+import UseAuthContext from "../hooks/useAuthContext";
+import ModalNotificaciones from "../components/modalNotificaciones";
 
 
 
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [anchorElNotificacion, setAnchorElNotificacion] = useState<null | HTMLElement>(null);
+    const { state } = UseAuthContext();
+  
 
+  const NotificationRead = state.notificaciones.filter((item)=>!item.leida)
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+   const handleOpenNotificacion = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNotificacion(event.currentTarget);
+  };
+
+
   return (
     <Box sx={{ height: "100vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
       
@@ -38,7 +49,7 @@ const Layout = () => {
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1, sm: 3 } }}>
           <IconButton
-            sx={{ display: { md: "none" }, color: "white" }}
+            sx={{ display: { lg: "none" }, color: "white" }}
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
             <MenuIcon />
@@ -50,7 +61,22 @@ const Layout = () => {
         </Box>
 
         <Box sx={{ display: "flex", gap: { xs: 1, sm: 4 }, alignItems: "center" }}>
-          <NotificationsNoneOutlinedIcon sx={{ color: "white" }} />
+           <IconButton onClick={handleOpenNotificacion}>
+                <Badge
+                  badgeContent={NotificationRead.length}
+                  sx={{
+                    "& .MuiBadge-badge": {
+                      backgroundColor: "#00f0ff",
+                      color: "#0b0f14",
+                      fontSize: 11,
+                      boxShadow: "0 0 8px rgba(0,240,255,0.7)"
+                    }
+                  }}
+                >
+                  <NotificationsNoneOutlinedIcon sx={{ color: "white" }} />
+                </Badge>
+            </IconButton>
+              <ModalNotificaciones anchorElNotificacion={anchorElNotificacion} setAnchorElNotificacion={setAnchorElNotificacion}/>
             <IconButton onClick={handleOpen}>
                <SettingsOutlinedIcon sx={{ color: "white" }} />
           </IconButton>
@@ -64,9 +90,9 @@ const Layout = () => {
         
         <Box
           sx={{
-            width: { xs: sidebarOpen ? "200px" : 0, md: "220px" },
+            width: { xs: sidebarOpen ? "200px" : 0, md: "250px" },
             background: "#0A0A12",
-            display: { xs: sidebarOpen ? "flex" : "none", md: "flex" },
+            display: { xs: sidebarOpen ? "flex" : "none", md: sidebarOpen ? "flex" : "none" ,lg:"flex" },
             flexDirection: "column",
             gap: "5px",
             borderRight: "1px solid rgba(255,255,255,0.1)",

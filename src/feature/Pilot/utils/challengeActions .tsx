@@ -17,13 +17,27 @@ export const ChallengeActions = ({challenge,status,soyRetador,yoReporte,handleOp
 const { acceptChallenge, rejectChallenge,cancelChallenge, startChallenge} = UseChallanges();
 
 
-      const handlerAcceptChallenge = (id: string, id_retado: string) => {
-    acceptChallenge({ id, id_retado });
+      const handlerAcceptChallenge = (id: string, id_retado: string,id_retador:string) => {
+        const  notification = {
+          user_id: id_retador,
+          tipo: "reto_aceptado",
+          mensaje:`el Pilot ${challenge.retado.username} ha aceptado el challenge`,
+          leida: false,
+        }
+    acceptChallenge({ id, id_retado,notification });
   };
 
-  const handlerRejectChallenge = (id: string, id_retado: string) => {
-    rejectChallenge({ id, id_retado });
+  
+  const handlerRejectChallenge = (id: string, id_retado: string,id_retador:string) => {
+    const  notification = {
+          user_id: id_retador,
+          tipo: "reto_rechazado",
+          mensaje:`el Pilot ${challenge.retado.username} ha rechado el challenge`,
+          leida: false,
+        }
+    rejectChallenge({ id, id_retado,notification });
   };
+
 
   const handlercancelChallenge = (id: string) => {
     cancelChallenge({ id });
@@ -66,9 +80,9 @@ const { acceptChallenge, rejectChallenge,cancelChallenge, startChallenge} = UseC
           <Button
             onClick={() => handleOpenModal(challenge)}
             variant="contained"
-            sx={btnGrey}
+            sx={{backgroundColor:"#BC13FE",color:"#fff"}}
           >
-            Finalizar
+            Visualizar
           </Button>
         );
 
@@ -110,7 +124,8 @@ const { acceptChallenge, rejectChallenge,cancelChallenge, startChallenge} = UseC
               onClick={() =>
                 handlerAcceptChallenge(
                   challenge.challenge.id,
-                  challenge.retado.id
+                  challenge.retado.id,
+                  challenge.retador.id
                 )
               }
               variant="contained"
@@ -123,7 +138,8 @@ const { acceptChallenge, rejectChallenge,cancelChallenge, startChallenge} = UseC
               onClick={() =>
                 handlerRejectChallenge(
                   challenge.challenge.id,
-                  challenge.retado.id
+                  challenge.retado.id,
+                  challenge.retador.id
                 )
               }
               variant="contained"
@@ -149,17 +165,6 @@ const { acceptChallenge, rejectChallenge,cancelChallenge, startChallenge} = UseC
           <Typography variant="caption" color="grey">
             Challenge en disputa .
           </Typography>
-          
-          
-              {/* <Button
-              onClick={() =>
-                handleOpenModal(challenge)
-              }
-              variant="contained"
-              sx={btnGrey}
-            >
-              dar opinion
-            </Button> */}
             </>
           
         );

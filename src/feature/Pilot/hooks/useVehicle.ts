@@ -17,8 +17,6 @@ const queryClient = useQueryClient();
     queryFn: async() => {
         try {
     const response = await Api.allVehicle();
-    console.log("INVALIDANDO...");
-    console.log(response);
     return response.data.result as Vehiculo[];
   } catch (err: any) {
     throw new Error(err.response?.data?.error || "Error desconocido");
@@ -80,7 +78,6 @@ const queryClient = useQueryClient();
       mutationFn:async(id:string)=>{
         try {
            const result = await Api.deleteVehicle(id)
-           console.log("delete vehicle",result.data)
         return result.data.message
         } catch (error:any) {
           const message =
@@ -89,9 +86,13 @@ const queryClient = useQueryClient();
         }
       },
 
-      onSuccess(){
+      onSuccess(_data,id){
+         queryClient.setQueryData(["challenges"], (oldData: any) => {
+              if (!oldData) return []
+
+              return oldData.filter((c: any) => c.id !== id)
+            })
          queryClient.invalidateQueries({ queryKey: ["vehicles"] });
-         queryClient.setQueryData(["vehicles"], [])
           showSuccess("se ha eliminado el vehiculo")  
           
       },

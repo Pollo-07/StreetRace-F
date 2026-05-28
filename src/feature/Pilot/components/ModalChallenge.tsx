@@ -23,9 +23,9 @@ import type { DiscoverUserWithVehicle } from "../../../types/vehicleTypes";
 
 
 const CARRERAS = [
-  { value:"Cuarto_milla", icon:"⚡" },
-  { value:"Vueltas", icon:"🌀" },
-  { value:"Derrape", icon:"🏁" },
+  { value:"cuarto_milla", icon:"⚡" },
+  { value:"vueltas", icon:"🌀" },
+  { value:"derrape", icon:"🏁" },
  
 ];
 
@@ -56,7 +56,6 @@ export default function ModalChallenge({ open,setOpen,initialData }: ModalChalle
   const {createChallenge} = UseChallanges()
 
 
-console.log("respectPilotData",respectPilotData)
 
 
  const handleClose = () => {
@@ -71,16 +70,23 @@ console.log("respectPilotData",respectPilotData)
       respect.id = formData.retado_id
     )
 
-   const newData = {
+   const challenge = {
   ...formData,
-  retador_id: user?.id,
-  vehiculo_retador_id: vehiclesActivo?.id,
-  vehiculo_retado_id:initialData? initialData.id_vehiculo : vehiculo_retado_id?.id_vehiculo ,
+  retador_id: user?.id!,
+  vehiculo_retador_id: vehiclesActivo?.id!,
+  vehiculo_retado_id:initialData? initialData.id_vehiculo : vehiculo_retado_id?.id_vehiculo! ,
   estado: "pendiente",
 };
 
+const notification = {
+  user_id:formData.retado_id,
+  tipo:"reto_recibido",
+  mensaje:`el user ${user?.username} te ha retado a una carrera`,
+  leida:false,
+}
 
-     createChallenge(newData)
+
+     createChallenge({challenge,notification})
 
       resetForm()
      

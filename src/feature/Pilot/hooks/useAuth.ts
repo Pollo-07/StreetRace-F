@@ -38,7 +38,15 @@ export const useAuth = () => {
         role:data.user.role
       }) 
       showSuccess("Inicio de sesión exitoso");  
-      navigate("/");
+
+      if(data.user.role === "admin"){
+         navigate("/admin")
+      }
+        if(data.user.role === "user"){
+         navigate("/")
+      }
+
+     ;
     },
     onError: (err) => {
       console.log("error",err)

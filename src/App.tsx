@@ -6,6 +6,8 @@ import { SnackbarProvider } from "notistack";
 import UseAuthContext from "./feature/Pilot/hooks/useAuthContext";
 import { useAuth } from "./feature/Pilot/hooks/useAuth";
 import ScrollToTop from "./components/ScrollToTop";
+import useSocket from "./feature/Pilot/hooks/useSocket";
+
 
 
 
@@ -16,8 +18,12 @@ export default function App() {
   const {refreshTokens}=useAuth()
 
 
+
+ useSocket()
+
   useEffect(()=>{
        refreshTokens()
+
   },[])
 
 

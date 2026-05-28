@@ -16,7 +16,7 @@
                 }).trim().toLowerCase(),
   email: z.email("Email inválido"),
   password_hash: z.string().min(6, "Mínimo 6 caracteres"),
-  tipo_categoria: z.string().min(1, {
+  categoria_id: z.string().min(1, {
   message: "Debes seleccionar una opción",
 }),
 

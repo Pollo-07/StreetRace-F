@@ -7,10 +7,6 @@ const AuthProvider = ({children}:{ children: ReactNode }) => {
     const [state,dispatch] = useReducer(AuthReducer,initialUserState)
 
 
-
-
-
-
   return (
     <AuthContext.Provider value={{state,dispatch}}>
         

@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
 import UseAppSnackbar from "./useAppSnackbar";
-import type { challengaAll } from "../../../types/challangeTypes";
+import type { challengaAll, ChallengeForm } from "../../../types/challangeTypes";
 import { Api } from "../../../services/api";
+import type { Notification } from "../../../types/userTypes";
 
 const UseChallenges = () => {
 
@@ -23,9 +24,9 @@ const UseChallenges = () => {
 
 
     const createChallenge = useMutation({
-        mutationFn: async(data:any) => { 
+        mutationFn: async({challenge,notification}:{challenge:ChallengeForm,notification:Notification}) => { 
           try {
-            const createChallenge = await Api.createChallenge(data) 
+            const createChallenge = await Api.createChallenge(challenge,notification) 
             return createChallenge.data
             
           } catch (error:any) {
@@ -45,15 +46,15 @@ const UseChallenges = () => {
           queryClient.invalidateQueries({ queryKey: ["challenges"] });
         },
         onError: (error) => {
-          showError(`Error al crear el vehículo ${error.message}`);  
+          showError(`Error al crear el challenge ${error.message}`);  
         },
         
         })
 
     const acceptChallenge = useMutation({
 
-      mutationFn:async({id,id_retado}:{id:string,id_retado:string})=>{
-        const result = await Api.acceptChallenge(id,id_retado)
+      mutationFn:async({id,id_retado,notification}:{id:string,id_retado:string,notification:Notification})=>{
+        const result = await Api.acceptChallenge(id,id_retado,notification)
         return result
       },
 
@@ -63,15 +64,15 @@ const UseChallenges = () => {
       },
 
       onError(){
-        showError("no se ha podido eliminar el challenge")
+        showError("no se ha podido aceptar el challenge")
       }
     })
 
 
        const rejectChallenge = useMutation({
 
-      mutationFn:async({id,id_retado}:{id:string,id_retado:string})=>{
-        const result = await Api.rejectChallenge(id,id_retado)
+      mutationFn:async({id,id_retado,notification}:{id:string,id_retado:string,notification:Notification})=>{
+        const result = await Api.rejectChallenge(id,id_retado,notification)
         return result
       },
 
@@ -107,10 +108,10 @@ const UseChallenges = () => {
 
     const completeChallenge = useMutation({
 
-      mutationFn:async({id,id_ganador,notas}:{id:string,id_ganador:string,notas:string})=>{
+      mutationFn:async({id,id_ganador,notas,notification}:{id:string,id_ganador:string,notas:string,notification:Notification[]})=>{
         try {
-            const result = await Api.completeChallenge(id,id_ganador,notas)
-        return result
+            const result = await Api.completeChallenge(id,id_ganador,notas,notification)
+        return result 
           
         } catch (error:any) {
           const message =
@@ -121,8 +122,15 @@ const UseChallenges = () => {
       
       },
 
-      onSuccess(){
+      onSuccess(_data,variables){
+
+          queryClient.setQueryData(["challenges"], (oldData: any) => {
+              if (!oldData) return []
+
+              return oldData.filter((c: any) => c.id !== variables.id)
+            })
         queryClient.invalidateQueries({ queryKey: ["challenges"] })
+
         showSuccess("se ha completadooo el challenge")
       },
 

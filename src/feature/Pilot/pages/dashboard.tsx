@@ -14,18 +14,13 @@ const Dashboard = () => {
         (challenge) =>
           challenge.challenge.estado === "aceptado" || challenge.challenge.estado === "en_curso",
       ).length
-  
-
-
-
-      console.log(challengesSize)
-  return (
+    return (
     <PageWrapper>
       <Box sx={{ width: "100%", height: "auto", pb: 5 }}>
         <Box
-          sx={{ display: "flex", alignItems: "flex-start", padding: 6, gap: 3 }}
+          sx={{ display: {md:"flex",}, alignItems: "flex-start", padding: 6, gap: 3 }}
         >
-          <Banner />
+          <Banner/>
           <Box>
             <RaceNow />
             <FindRivals />
@@ -76,8 +71,6 @@ const Dashboard = () => {
            <Box sx={{display:"flex",gap:2,flexWrap: "wrap",justifyContent:"center"}}>
                <CardsChallenge active={true} />
            </Box>
-
-          
         </Box>
 
         <Box sx={{ p: "25px 0px 0px 47px"}}>

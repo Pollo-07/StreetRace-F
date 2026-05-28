@@ -10,8 +10,12 @@ const AuthReducer = (state:UserActionTypes,action:UserAction):UserActionTypes =>
         
     case "SET_LOADING":
         return {...state,loading:action.payload}
-    
-    
+
+     case "SET_NOTIFICACIONES":
+        return {...state,notificaciones:action.payload}  
+        
+         case "ADD_NOTIFICACIONES":
+        return {...state,notificaciones:[action.payload,...state.notificaciones]} 
     default:
         return state;
  }
