@@ -136,10 +136,11 @@ const refreshTokens = useMutation({
     onSuccess() {
       showSuccess("se ha cerrado la sesion")
       setAuthToken(null)
+      localStorage.removeItem("profileModalShown");
     },
 
      onError(error) {
-      showSuccess(`se ha podido cerrado la sesion ${error.message}`)
+      showError(`se ha podido cerrado la sesion ${error.message}`)
     },
   })
 

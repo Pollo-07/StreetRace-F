@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 
 
 
@@ -16,12 +17,16 @@ const CompleteProfileModal = () => {
 
     const [open,setOpen] = useState<boolean>(false)
     const  navigate = useNavigate()
+    const  {user} = useUser()
+
+    const isProfileComplete = !!(user?.zona_ciudad && user?.zona_estado && user?.zona_localidad)
 
 
     useEffect(() => {
+        if (!user) return;
   const alreadyShown = localStorage.getItem("profileModalShown");
 
-  if (alreadyShown) return;
+  if (alreadyShown || isProfileComplete) return;
 
   const timer = setTimeout(() => {
     setOpen(true);
@@ -29,12 +34,10 @@ const CompleteProfileModal = () => {
   }, 5000);
 
   return () => clearTimeout(timer);
-}, []);
+}, [user,isProfileComplete]);
 
 
 const onContinue=()=>{
-
-    console.log("hechooo")
    setOpen(false)
     navigate("/edituser")
 }

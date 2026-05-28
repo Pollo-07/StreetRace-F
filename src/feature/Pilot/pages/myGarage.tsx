@@ -21,6 +21,8 @@ const MyGarage = () => {
     setOpen(true);
   };
 
+
+  console.log("🚀 ~ file: myGarage.tsx:17 ~ MyGarage ~ vehicles:", vehicleActivo);
   return (
     <PageWrapper>
       <Box sx={{ color: "white" }}>
