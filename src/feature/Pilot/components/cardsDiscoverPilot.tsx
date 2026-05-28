@@ -20,13 +20,8 @@ const CardsDiscoverPilot = () => {
   };
 
   const { discoverPilot, respectPilot, respectPilotData } = useUser();
-
-  const img =
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDOKrzkedjMW70mRTqCi3L68pEKcc77rV6siiJoHW29mVBw16WaeR1OgrTZq8oYPwztxnRzg-90oPW_K8YtoiGxcRrCJ7cM92oK_Kh7W4d1tdiID7u9oPVhyrtkCUBu_p3QC59f6lL0DRCgAOVQwPLWG6uQ1lkiwedgHXRV3RwzjVC2-hHm10NrLuU1tgSpp10JJSq2IY5rAMzhXae-mRL0bNL_D-AYgr8ytPFRM9-qk5kCFLIzP16wgNNobHRRxdEl_zB1A3QaGx";
-
-  const car =
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCWERGK2no66i6d2VnOOGDJrv5uGZkn_rOqwWVqln4UVYL8ajA9xKjN0FGGd5R33hXkv1KhDxfhBKjYmgC3PYnMY6sPpjrSvSinsA1EyAwP-ssYFYcx_bq7_7ybQoI246BjQeaPvwpZkFfzr1SyYqvivQSus5ZgXuDsZedP_BtS2EokKqckwn3H046fwTbwB6p4y0SP3cEvzjYbhqxdy9fIifsyKvoSoKJ-GXeWJtclrI0By9ZyCzS9bI2wVgOzR7xvy7-HYke2TyxP";
-
+  const imge_default = "https://res.cloudinary.com/di2pvfv0q/image/upload/v1779989724/default-avatar-icon-of-social-media-user-vector_ygyfmk.jpg";
+  const imge_defaultCars = "https://res.cloudinary.com/di2pvfv0q/image/upload/v1779991342/cards-defauld_l0shjg.png";
   return (
     <>
       {discoverPilot?.length !== 0 ? (
@@ -89,7 +84,7 @@ const CardsDiscoverPilot = () => {
                     <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                       <Box
                         component="img"
-                        src={img}
+                        src={pilot.foto_perfil || imge_default}
                         sx={{
                           width: 64,
                           height: 64,
@@ -205,7 +200,7 @@ const CardsDiscoverPilot = () => {
                   >
                     <CardMedia
                       component="img"
-                      image={car}
+                      image={pilot.foto|| imge_defaultCars}
                       sx={{
                         height: "100%",
                         objectFit: "cover",
