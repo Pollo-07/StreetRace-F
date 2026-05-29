@@ -26,11 +26,23 @@ export default function DisputeOpinionModal({
 }: Props) {
  
   const [selected, setSelected] = useState<string>("");
-  const {challengeComplete} = useAdmin()
+  const {resolveChallengeDisputed} = useAdmin()
 
   const handleSubmit = () => {
+    const createNotification = (user_id: string) => ({
+      user_id,
+      tipo: "resultado",
+      mensaje: `El challenge ${challenge.challenge.tipo_carrera} ha sido resuelto`,
+      leida: false,
+    });
 
-     challengeComplete({id:challenge?.challenge.id,ganador_id:selected})
+    const notification = [
+      createNotification(challenge.retador.id),
+      createNotification(challenge.retado.id),
+    ]
+
+
+     resolveChallengeDisputed({id:challenge?.challenge.id,ganador_id:selected,notification:notification})
   };
 const onClose=()=>{
   Setopen(false)

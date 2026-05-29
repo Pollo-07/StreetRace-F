@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import {Api} from "../../../services/api"
 import UseAppSnackbar from "../../Pilot/hooks/useAppSnackbar"
-import type { User, UserForm } from "../../../types/userTypes"
+import type { Notification, User, UserForm } from "../../../types/userTypes"
+
 import type { challengaAll } from "../../../types/challangeTypes"
 
 export const useAdmin = () => {
@@ -60,9 +61,10 @@ const userAllSearch = useMutation({
 
 
 const resolveChallengeDisputed= useMutation({
-    mutationFn:async({id,ganador_id}:{id:string,ganador_id:string})=>{
+    mutationFn:async({id,ganador_id,notification}:{id:string,ganador_id:string,notification:Notification[]})=>{
         try {
-            const result =  await Api.resolveChallengeDisputed(id,ganador_id)
+            console.log("resolviendo challenge",id,ganador_id,notification)
+            const result =  await Api.resolveChallengeDisputed(id,ganador_id,notification)
              return result.data
         } catch (error:any) {
             throw new Error(error.response?.data?.error || "Error desconocido");
@@ -129,29 +131,7 @@ const updateUser = useMutation({
   },
     });
 
-const challengeComplete = useMutation({
-  mutationFn: async ({id,ganador_id}: {id:string,ganador_id:string} ) => {
 
-    try {
-      const res = await Api.challengeComplete(id,ganador_id);
-    return res.data;
-      
-    } catch (err:any) {
-
-      throw new Error(err.response?.data?.error || "Error desconocido");
-      
-    }
-    
-  },
-  onSuccess: () => {
-    showSuccess("se ha completado el challenge con éxito");
-    queryClient.invalidateQueries({ queryKey: ["ChallengeDisputed"] })
-
-  },
-   onError: (err) => {
-      showError(` Error no se ha completado el challenge ${err?.message || "Inténtalo de nuevo"}`,);
-  },
-    });
 
 
 
@@ -165,9 +145,7 @@ const challengeComplete = useMutation({
   deleteUser:deleteUser.mutate,
   updateUser:updateUser.mutate,
   userAllSearch:userAllSearch.mutateAsync,
-  challengeComplete:challengeComplete.mutate
-  
-  
+    
   };
 
 }

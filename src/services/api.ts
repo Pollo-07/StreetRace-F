@@ -76,8 +76,7 @@ export const Api = {
   acceptChallenge: (id:string,id_retado:string,notification:Notification) =>api.patch(`challenges/acceptChallenge`,{id,id_retado,notification}),
   rejectChallenge: (id:string,id_retado:string,notification:Notification) =>api.patch(`challenges/rejectChallenge`,{id,id_retado,notification}),
   cancelChallenge: (id:string) =>api.patch(`challenges/cancelChallenge`,{id}),
-
-   completeChallenge: (id:string,id_ganador:string,notas:string,notification:Notification[]) => api.patch(`challenges/reporteChallenge`,{id,id_ganador,notas,notification}),
+  completeChallenge: (id:string,id_ganador:string,notas:string,notification:Notification[]) => api.patch(`challenges/reporteChallenge`,{id,id_ganador,notas,notification}),
  
   startChallenge: (id:string) =>api.patch(`challenges/startChallenge`,{id}),
 
@@ -102,10 +101,10 @@ export const Api = {
   }),
   deleteUser: (id:string ) =>api.delete(`user/deleteUser/${id}`,),
   ChallengeDisputed:()=>api.get("challenges/ChallengeDisputed"),
-  resolveChallengeDisputed:(id:string,ganador_id:string)=>api.post("challenges/resolveChallengeDisputed",{id,ganador_id}),
+  resolveChallengeDisputed:(id:string,ganador_id:string,notification:Notification[])=>
+    api.patch("challenges/completeChallenge",{id,ganador_id,notification}),
   updateUser: ( data: any,id:string) =>api.patch("user/updateUser", {data,id}),
 
-  challengeComplete:(id:string,ganador_id:string)=>api.patch("challenges/completeChallenge",{id,ganador_id})
 
 
 
