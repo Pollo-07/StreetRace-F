@@ -152,9 +152,13 @@ const { acceptChallenge, rejectChallenge,cancelChallenge, startChallenge} = UseC
 
       case "completado":
         return (
-          <Typography variant="caption" color="grey">
-            Challenge finalizado.
-          </Typography>
+          <Button
+            onClick={() => handleOpenModal(challenge)}
+            variant="contained"
+            sx={{backgroundColor:"#BC13FE",color:"#fff"}}
+          >
+            Visualizar
+          </Button>
         );
 
 

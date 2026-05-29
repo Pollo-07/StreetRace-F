@@ -6,6 +6,7 @@ import SpeedOutlinedIcon from "@mui/icons-material/SpeedOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined";
+import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
@@ -112,6 +113,7 @@ const Layout = () => {
 
           <Link className="link" to="/"><SpeedOutlinedIcon sx={{ mr: 1 }} />Dashboard</Link>
           <Link className="link" to="/challenges"><EmojiEventsOutlinedIcon sx={{ mr: 1 }} />Challenges</Link>
+          <Link className="link" to="/challengeComplete"><TaskAltOutlinedIcon sx={{ mr: 1 }} />Challenges Complete</Link>
           <Link className="link" to="/discoverPilot"><SearchOutlinedIcon sx={{ mr: 1 }} />Encontrar Piloto</Link>
           <Link className="link" to="/garage"><DirectionsCarFilledOutlinedIcon sx={{ mr: 1 }} />My Garage</Link>
           <Link className="link" to="/perfil"><AccountCircleOutlinedIcon sx={{ mr: 1 }} />Piloto Perfil</Link>

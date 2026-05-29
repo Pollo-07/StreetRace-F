@@ -27,25 +27,7 @@ api.interceptors.request.use(
 );
 
 
-// api.interceptors.response.use(
-//   res=>res,
-//   async error=>{
-//     const originalRequest = error.config;
-//     if (error.response?.status === 401 && !originalRequest._retry) {
 
-//       try {
-//         const res = await Auth.refreshToken();
-//         console.log("error interceptor",res.data)
-//         const newToken = res.data.accessToken
-//         api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`
-//       } catch (error) {
-//         console.log("error",error)
-//       }
-//     }
-
-//     return Promise.reject(error)
-//   }
-// )
 
 export const Api = {
   // AUTH //
@@ -77,9 +59,8 @@ export const Api = {
   rejectChallenge: (id:string,id_retado:string,notification:Notification) =>api.patch(`challenges/rejectChallenge`,{id,id_retado,notification}),
   cancelChallenge: (id:string) =>api.patch(`challenges/cancelChallenge`,{id}),
   completeChallenge: (id:string,id_ganador:string,notas:string,notification:Notification[]) => api.patch(`challenges/reporteChallenge`,{id,id_ganador,notas,notification}),
- 
   startChallenge: (id:string) =>api.patch(`challenges/startChallenge`,{id}),
-
+challengeComplete: (id: string | undefined) => api.get(`challenges/challengeComplete/${id}`),
   
 //NOTIFICATION 
   Notification: () => api.get("notification/",),

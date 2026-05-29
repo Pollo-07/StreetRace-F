@@ -2,16 +2,27 @@ import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
 import UseAppSnackbar from "./useAppSnackbar";
 import type { challengaAll, ChallengeForm } from "../../../types/challangeTypes";
 import { Api } from "../../../services/api";
-import type { Notification } from "../../../types/userTypes";
+import type { AuthData, Notification } from "../../../types/userTypes";
+import { useAuth } from "./useAuth";
 
-const UseChallenges = () => {
+type UseChallengesOptions = {
+  enableChallenges?: boolean;
+  enableCompleteChallenges?: boolean;
+};
+
+const UseChallenges = ({
+  enableChallenges = true,
+  enableCompleteChallenges = false,
+}: UseChallengesOptions = {}) => {
 
   const queryClient = useQueryClient()
   const {    showSuccess,showError  } = UseAppSnackbar()
- 
+
+  const authData = queryClient.getQueryData<AuthData>(["auth"]); 
 
     const { data: challenges ,isLoading,error} = useQuery({
         queryKey: ["challenges"],
+        enabled: enableChallenges,
         queryFn: async() => {
             try {
         const response = await Api.allChallenges();
@@ -21,6 +32,20 @@ const UseChallenges = () => {
         }}
     
     })
+
+ const { data: challengeComplete, isLoading: isLoadingChallengeComplete, error: errorChallengeComplete } = useQuery({
+    queryKey: ["challengeComplete", authData?.userId],
+    enabled: enableCompleteChallenges && !!authData?.userId,
+    queryFn: async () => { 
+        try {
+            const response = await Api.challengeComplete(authData?.userId);
+            console.log("challengeComplete",response.data)
+            return response.data.result as challengaAll[];
+        } catch (err: any) {
+            throw new Error(err.response?.data?.error || "Error desconocido");
+        }
+    }
+})
 
 
     const createChallenge = useMutation({
@@ -163,8 +188,11 @@ const UseChallenges = () => {
 
   return {
     challenges: challenges,
+    challengeComplete,
     isLoadingChallanges:isLoading,
+    isLoadingChallengeComplete,
     errorChallanges:error,
+    errorChallengeComplete,
     createChallenge: createChallenge.mutate,
     acceptChallenge:acceptChallenge.mutate,
     rejectChallenge:rejectChallenge.mutate,

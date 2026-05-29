@@ -39,6 +39,7 @@ export interface challengaAll {
     estado: ChallengeStatus;
     ubicacion_acordada: string;
     notas: string | null;
+    ganador_id?: string | null;
     reporte_retador_id: string | null;
     reporte_retado_id: string | null;
     fecha_acordada:string

@@ -7,6 +7,7 @@ import Dashboard from "../feature/Pilot/pages/dashboard"
 import Profile from "../feature/Pilot/pages/profile"
 import MyGarage from "../feature/Pilot/pages/myGarage"
 import Challenge from "../feature/Pilot/pages/challenge"
+import ChallengeComplete from "../feature/Pilot/pages/challengeComplete"
 import EditUser from "../feature/Pilot/pages/editUser"
 import DiscoverPilot from "../feature/Pilot/pages/discoverPilot"
 import RankingPage from "../feature/admin/pages/rankingPage"
@@ -28,6 +29,7 @@ import AdminLayout from "../feature/admin/layout/AdminLayout "
                 <Route path="/perfil" element={<Profile />} />
                 <Route path="/garage" element={<MyGarage />} />
                 <Route path="/challenges" element={<Challenge/>}></Route>
+                <Route path="/challengeComplete" element={<ChallengeComplete/>}></Route>
                 <Route path="/editUser" element={<EditUser/>}></Route>
                 <Route path="/discoverPilot" element={<DiscoverPilot/>}></Route>
             </Route>

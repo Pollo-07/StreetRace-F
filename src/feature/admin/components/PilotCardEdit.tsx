@@ -15,7 +15,7 @@ export default function PilotCardEdit({setPilotData,user}:PilotCardEditPops) {
 
   const imge_default = "https://res.cloudinary.com/di2pvfv0q/image/upload/v1779989724/default-avatar-icon-of-social-media-user-vector_ygyfmk.jpg";
 
-
+console.log(user,"esto es user en pilot card edit")
   return (
         <Box>
         {user?.data?.map((user) => {

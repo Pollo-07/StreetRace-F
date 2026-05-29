@@ -7,28 +7,31 @@ import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined
 import { ChallengeActions } from "../utils/challengeActions ";
 import ModalFinalizar from "../../../components/modalFinalizar";
 import ChallangeEmpty from "./challangeEmpty";
+import type { challengaAll } from "../../../types/challangeTypes";
 type Props = {
   active?: boolean;
+  challengesData?: challengaAll[];
+  readOnly?: boolean;
 };
 
-const CardsChallenge = ({ active }: Props) => {
+const CardsChallenge = ({ active, challengesData, readOnly = false }: Props) => {
   const [open, Setopen] = useState<boolean>(true);
 
 
   const [selectedChallenge, setSelectedChallenge] = useState<any>(null);
-  const { challenges } = UseChallanges();
+  const { challenges } = UseChallanges({ enableChallenges: !challengesData });
 
   const { user } = useUser();
   const userId = user?.id;
   const imge_default = "https://res.cloudinary.com/di2pvfv0q/image/upload/v1779989724/default-avatar-icon-of-social-media-user-vector_ygyfmk.jpg";
 
   const challengesFilter = active
-    ? challenges?.filter(
+    ? (challengesData ?? challenges)?.filter(
         (challenge) =>
           challenge.challenge.estado === "aceptado" ||
           challenge.challenge.estado === "en_curso",
       )
-    : challenges;
+    : (challengesData ?? challenges);
 
   const handleOpenModal = (challengeItem: any) => {
     setSelectedChallenge(challengeItem);
@@ -231,6 +234,7 @@ const CardsChallenge = ({ active }: Props) => {
           open={open}
           challenge={selectedChallenge}
           Setopen={Setopen}
+          readOnly={readOnly}
         />
       )}
     </>

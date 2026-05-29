@@ -12,6 +12,7 @@ type Props = {
   open: boolean;
   challenge: challengaAll;
   Setopen: React.Dispatch<React.SetStateAction<boolean>>;
+  readOnly?: boolean;
 };
 
 
@@ -19,11 +20,16 @@ type Coordenadas = {
   lon:number,
   lat:number
 }
-const ModalFinalizar = ({ open, Setopen, challenge }: Props) => {
+const ModalFinalizar = ({ open, Setopen, challenge, readOnly = false }: Props) => {
   const [selected, setSelected] = useState<string>("");
   const [notas, setNotas] = useState<string>("");
   const [dir, setDir] = useState<Coordenadas>({ lon: 0, lat: 0});
   const participantes = [challenge.retador, challenge.retado];
+  const ganadorId =
+    challenge.challenge.ganador_id ||
+    challenge.challengeReport.retador_ganador_id ||
+    challenge.challengeReport.retado_ganador_id;
+  const ganador = participantes.find((p) => p.id === ganadorId);
   const { completeChallenge } = UseChallanges();
 
 useEffect(()=>{
@@ -188,7 +194,7 @@ useEffect(()=>{
          
         </SectionBlock>
 
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        {!readOnly && <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <SectionBlock label="Seleccionar ganador">
               {participantes.map((p) => (
                 <ButtonCustom sx={{border:selected === p.id? "1px solid green":""}} key={p.id} onClick={() => setSelected(p.id)} >
@@ -208,19 +214,37 @@ useEffect(()=>{
               label="Tu opinión"
             />
           </SectionBlock>
-        </Box>
+        </Box>}
+
+        {readOnly && <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <SectionBlock label="Ganador">
+            <Box
+              sx={{
+                p: 2.5,
+                borderRadius: 3,
+                border: "1px solid rgba(0,240,255,0.12)",
+                bgcolor: "rgba(255,255,255,0.02)",
+                color: "#00f0ff",
+                fontSize: 18,
+                fontWeight: 700,
+              }}
+            >
+              {ganador?.username || "Ganador no definido"}
+            </Box>
+          </SectionBlock>
+        </Box>}
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2, bgcolor: "#000" }}>
-        <ButtonCustom onClick={onClose}>Cancelar</ButtonCustom>
+        <ButtonCustom onClick={onClose}>{readOnly ? "Cerrar" : "Cancelar"}</ButtonCustom>
 
-        <ButtonCustom
+        {!readOnly && <ButtonCustom
           disabled={!selected}
           onClick={() =>
             handleCompleteChallenge(challenge.challenge.id, selected)
           }
         >
           Confirmar ganador
-        </ButtonCustom>
+        </ButtonCustom>}
       </DialogActions>
     </Dialog>
   );

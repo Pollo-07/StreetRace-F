@@ -15,8 +15,8 @@ const ModalNotificaciones = ({ anchorElNotificacion,setAnchorElNotificacion,}: M
   const {allNotificationsAsRead} =UseNotification()
 
 
-  const handlerMenu=()=>{
-    navigate("/challenges")
+  const handlerMenu=(tipo:string)=>{
+    navigate(tipo === "resultado" ? "/challengeComplete" : "/challenges")
     setAnchorElNotificacion(null)
   }
 
@@ -66,7 +66,7 @@ const ModalNotificaciones = ({ anchorElNotificacion,setAnchorElNotificacion,}: M
     ) : (
       state.notificaciones.map((n, i) => (
         <MenuItem
-         onClick={()=>handlerMenu()}
+         onClick={()=>handlerMenu(n.tipo)}
           key={i}
           sx={{
             width:350,
